@@ -237,10 +237,13 @@ fn app() -> Router {
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let port = std::env::var("PORT")
-        .unwrap_or_else(|_| "3000".into())
-        .parse::<u16>()?;
-    let listener = tokio::net::TcpListener::bind((std::net::Ipv4Addr::LOCALHOST, port)).await?;
+    // 1. .env 파일을 읽어 프로세스 환경 변수로 로드
+    // (로컬에 .env 파일이 없거나 선택적일 때는 .ok()로 무시할 수도 있음)
+    let _ = dotenvy::dotenv();    
+    let host = std::env::var("BIND_ADDRESS").unwrap_or_else(|_| "0.0.0.0".into());
+    let port = std::env::var("PORT").unwrap_or_else(|_| "6000".into()).parse::<u16>()?;
+    let address = format!("{}:{}", host, port);
+    let listener = tokio::net::TcpListener::bind(address).await?;
     println!("Rust 자료구조 노트: http://{}", listener.local_addr()?);
     axum::serve(listener, app()).await?;
     Ok(())
