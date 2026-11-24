@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 900 440">
+  <title>반열린 구간을 계산하는 누적 합</title>
+  <desc>배열 3, -1, 4, 1, 5의 누적 합에서 [1,4) 구간의 합을 prefix[4]에서 prefix[1]을 빼 계산</desc>
+  <rect width="900" height="440" fill="#f2f8f4"/>
+  <g font-family="sans-serif" fill="#173b2b">
+    <text x="55" y="55" font-size="28" font-weight="700">누적 합 · 반열린 구간 [left, right)</text>
+    <text x="55" y="90" font-size="20">prefix[right] − prefix[left] = 구간 합</text>
+    <g font-size="18" text-anchor="middle" font-weight="700"><text x="115" y="132">입력 인덱스</text><text x="230" y="132">0</text><text x="350" y="132">1</text><text x="470" y="132">2</text><text x="590" y="132">3</text><text x="710" y="132">4</text></g>
+    <g stroke="#286044" stroke-width="2"><rect x="170" y="150" width="120" height="62" fill="#d9eee1"/><rect x="290" y="150" width="120" height="62" fill="#b9dfc8"/><rect x="410" y="150" width="120" height="62" fill="#b9dfc8"/><rect x="530" y="150" width="120" height="62" fill="#b9dfc8"/><rect x="650" y="150" width="120" height="62" fill="#d9eee1"/></g>
+    <g font-size="25" text-anchor="middle"><text x="230" y="190">3</text><text x="350" y="190">-1</text><text x="470" y="190">4</text><text x="590" y="190">1</text><text x="710" y="190">5</text></g>
+    <g font-size="18" text-anchor="middle" font-weight="700"><text x="90" y="260">prefix 인덱스</text><text x="170" y="260">0</text><text x="290" y="260">1</text><text x="410" y="260">2</text><text x="530" y="260">3</text><text x="650" y="260">4</text><text x="770" y="260">5</text></g>
+    <g stroke="#286044" stroke-width="2"><rect x="110" y="275" width="120" height="48" fill="#d9eee1"/><rect x="230" y="275" width="120" height="48" fill="#b9dfc8"/><rect x="350" y="275" width="120" height="48" fill="#b9dfc8"/><rect x="470" y="275" width="120" height="48" fill="#b9dfc8"/><rect x="590" y="275" width="120" height="48" fill="#b9dfc8"/><rect x="710" y="275" width="120" height="48" fill="#d9eee1"/></g>
+    <g font-size="23" text-anchor="middle"><text x="170" y="307">0</text><text x="290" y="307">3</text><text x="410" y="307">2</text><text x="530" y="307">6</text><text x="650" y="307">7</text><text x="770" y="307">12</text></g>
+    <path d="M290 340v-14 M650 340v-14" stroke="#1c7c54" stroke-width="4"/>
+    <rect x="175" y="365" width="550" height="48" rx="24" fill="#b9dfc8" stroke="#286044" stroke-width="2"/>
+    <text x="450" y="397" text-anchor="middle" font-size="23" font-weight="700">[1, 4) = prefix[4] − prefix[1] = 7 − 3 = 4</text>
+  </g>
+</svg>

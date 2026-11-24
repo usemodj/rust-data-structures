@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 900 440">
+  <title>칸 알고리즘의 위상 정렬</title>
+  <desc>간선 0에서 1과 2로, 1과 2에서 3으로 향하는 그래프를 진입 차수가 0인 순서대로 정렬</desc>
+  <rect width="900" height="440" fill="#f2f8f4"/>
+  <g font-family="sans-serif" fill="#173b2b">
+    <text x="55" y="55" font-size="28" font-weight="700">위상 정렬 · 칸 알고리즘</text>
+    <text x="55" y="90" font-size="20">진입 차수 0인 정점부터 큐에서 꺼냅니다</text>
+    <g stroke="#286044" stroke-width="4" fill="#d9eee1">
+      <circle cx="180" cy="220" r="42"/><circle cx="400" cy="145" r="42"/><circle cx="400" cy="295" r="42"/><circle cx="640" cy="220" r="42"/>
+      <path d="M217 205L360 157 M217 235L360 283 M440 157L600 207 M440 283L600 233" fill="none" marker-end="url(#arrow)"/>
+    </g>
+    <g text-anchor="middle" font-size="25" font-weight="700"><text x="180" y="229">0</text><text x="400" y="154">1</text><text x="400" y="304">2</text><text x="640" y="229">3</text></g>
+    <g font-size="19"><text x="125" y="165">차수 0</text><text x="355" y="110">차수 1</text><text x="595" y="165">차수 2</text></g>
+    <rect x="75" y="355" width="750" height="52" rx="26" fill="#b9dfc8" stroke="#286044" stroke-width="2"/>
+    <text x="450" y="389" text-anchor="middle" font-size="24" font-weight="700">큐 처리 순서: 0 → 1 → 2 → 3  (모든 간선의 방향 준수)</text>
+  </g>
+  <defs><marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="4" orient="auto"><path d="M0,0 L0,8 L11,4 z" fill="#286044"/></marker></defs>
+</svg>

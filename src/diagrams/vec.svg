@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 440" role="img" aria-labelledby="title desc">
+  <title id="title">Vec의 연속 버퍼 구조</title>
+  <desc id="desc">Vec의 초기화된 길이와 아직 초기화되지 않은 용량을 구분해 보여주는 개념도</desc>
+  <rect width="900" height="440" rx="24" fill="#f3fbf4"/>
+  <text x="450" y="48" text-anchor="middle" font-family="sans-serif" font-size="28" font-weight="700" fill="#174d35">Vec&lt;T&gt;: 연속 메모리 버퍼</text>
+  <text x="450" y="84" text-anchor="middle" font-family="sans-serif" font-size="19" fill="#38634d">요소는 앞에서부터 연속으로 배치되고 len은 초기화된 요소 수를 뜻합니다</text>
+  <text x="70" y="143" font-family="sans-serif" font-size="21" font-weight="700" fill="#174d35">len = 4</text>
+  <text x="70" y="172" font-family="sans-serif" font-size="18" fill="#38634d">초기화된 요소</text>
+  <rect x="220" y="122" width="560" height="82" rx="10" fill="#d5f0d9" stroke="#28784d" stroke-width="3"/>
+  <path d="M360 122v82M500 122v82M640 122v82M780 122v82" stroke="#28784d" stroke-width="2"/>
+  <text x="290" y="171" text-anchor="middle" font-family="sans-serif" font-size="25" font-weight="700" fill="#174d35">A</text><text x="430" y="171" text-anchor="middle" font-family="sans-serif" font-size="25" font-weight="700" fill="#174d35">B</text><text x="570" y="171" text-anchor="middle" font-family="sans-serif" font-size="25" font-weight="700" fill="#174d35">C</text><text x="710" y="171" text-anchor="middle" font-family="sans-serif" font-size="25" font-weight="700" fill="#174d35">D</text>
+  <text x="70" y="273" font-family="sans-serif" font-size="21" font-weight="700" fill="#174d35">capacity = 6</text>
+  <text x="70" y="302" font-family="sans-serif" font-size="18" fill="#38634d">초기화된 4칸 + 미사용 여유 2칸</text>
+  <rect x="220" y="252" width="560" height="82" rx="10" fill="#fff1cf" stroke="#b87919" stroke-width="3"/>
+  <rect x="220" y="252" width="373" height="82" rx="10" fill="#d5f0d9"/>
+  <path d="M313 252v82M407 252v82M500 252v82M593 252v82M686 252v82" stroke="#b87919" stroke-width="2"/>
+  <text x="266" y="301" text-anchor="middle" font-family="sans-serif" font-size="22" fill="#174d35">A</text><text x="360" y="301" text-anchor="middle" font-family="sans-serif" font-size="22" fill="#174d35">B</text><text x="454" y="301" text-anchor="middle" font-family="sans-serif" font-size="22" fill="#174d35">C</text><text x="547" y="301" text-anchor="middle" font-family="sans-serif" font-size="22" fill="#174d35">D</text>
+  <text x="687" y="301" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#7b5514">미사용 × 2</text>
+  <text x="450" y="391" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#38634d">개념도: 실제 버퍼 주소·용량 증가 방식은 구현과 할당자에 따라 달라질 수 있습니다</text>
+</svg>

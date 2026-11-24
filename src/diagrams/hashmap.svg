@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 440" role="img" aria-labelledby="title desc">
+  <title id="title">HashMap 해시 버킷과 충돌</title>
+  <desc id="desc">키를 해시 버킷에 연결하고 충돌한 항목을 함께 보여 주는 개념도</desc>
+  <rect width="900" height="440" fill="#f2fbf4"/>
+  <text x="450" y="42" text-anchor="middle" font-size="26" font-weight="bold" fill="#174d35">HashMap: 키 → 해시 → 버킷</text>
+  <g font-size="19" fill="#173b2b" font-family="sans-serif">
+    <rect x="55" y="105" width="205" height="245" rx="16" fill="#d5f1df" stroke="#3b8f62" stroke-width="3"/>
+    <text x="157" y="138" text-anchor="middle" font-weight="bold">키와 값</text>
+    <rect x="80" y="160" width="155" height="48" rx="8" fill="#fff" stroke="#78b997"/><text x="157" y="191" text-anchor="middle">"사과" : 3</text>
+    <rect x="80" y="224" width="155" height="48" rx="8" fill="#fff" stroke="#78b997"/><text x="157" y="255" text-anchor="middle">"배" : 5</text>
+    <text x="157" y="315" text-anchor="middle" fill="#356451">Hash + Eq</text>
+    <path d="M260 205 H355" stroke="#28744b" stroke-width="4" marker-end="url(#arrow)"/><path d="M260 270 H355" stroke="#28744b" stroke-width="4" marker-end="url(#arrow)"/>
+    <rect x="355" y="145" width="190" height="165" rx="16" fill="#cce8f5" stroke="#397da0" stroke-width="3"/>
+    <text x="450" y="180" text-anchor="middle" font-weight="bold">해시 계산</text><text x="450" y="220" text-anchor="middle">h(key) % 용량</text><text x="450" y="262" text-anchor="middle" fill="#31566c">버킷 위치 결정</text>
+    <path d="M545 228 H630" stroke="#28744b" stroke-width="4" marker-end="url(#arrow)"/>
+    <rect x="630" y="80" width="215" height="290" rx="16" fill="#fff4d6" stroke="#c79835" stroke-width="3"/>
+    <text x="737" y="113" text-anchor="middle" font-weight="bold">버킷 배열</text>
+    <path d="M660 140 H815 M660 195 H815 M660 250 H815 M660 305 H815" stroke="#c79835" stroke-width="2"/>
+    <text x="680" y="174">0</text><text x="710" y="174">빈 버킷</text><text x="680" y="229">1</text><text x="710" y="229">사과 → 3</text><text x="680" y="284">2</text><text x="710" y="284">배 → 5</text><text x="680" y="339">3</text><text x="710" y="339">충돌 시 함께 탐색</text>
+  </g>
+  <text x="450" y="410" text-anchor="middle" font-size="17" fill="#356451">개념적 해시 흐름이며 실제 내부 배치·순회 순서를 나타내지 않습니다.</text>
+  <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#28744b"/></marker></defs>
+</svg>

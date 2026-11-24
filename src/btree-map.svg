@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 440" role="img" aria-labelledby="title description">
+  <title id="title">BTreeMap의 정렬된 키와 순회 흐름</title>
+  <desc id="description">루트 노드의 키 20과 40을 기준으로 자식 노드가 세 구간으로 나뉘며, 순회 결과는 10, 15, 20, 25, 30, 40, 45, 50 순서입니다.</desc>
+  <rect x="1" y="1" width="898" height="438" rx="18" fill="#f4f8ef" stroke="#d8e6d5" stroke-width="2"/>
+  <text x="38" y="43" fill="#50745c" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="14" font-weight="700" letter-spacing="1">BTREEMAP · 정렬 구조 개념도</text>
+  <text x="38" y="72" fill="#637b6a" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="14">하나의 노드에 여러 키와 값이 정렬되어 저장됩니다.</text>
+
+  <g stroke="#8aad94" stroke-width="2.5" fill="none">
+    <path d="M370 177 C320 203 255 214 180 230"/>
+    <path d="M450 177 L450 230"/>
+    <path d="M530 177 C580 203 645 214 720 230"/>
+  </g>
+
+  <text x="450" y="104" text-anchor="middle" fill="#647d6c" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="13" font-weight="700">루트 노드</text>
+  <rect x="331" y="119" width="238" height="60" rx="12" fill="#285d43"/>
+  <line x1="450" y1="130" x2="450" y2="168" stroke="#78a587" stroke-width="1.5"/>
+  <text x="390" y="156" text-anchor="middle" fill="#ffffff" font-family="Consolas, monospace" font-size="18" font-weight="700">20 : C</text>
+  <text x="509" y="156" text-anchor="middle" fill="#ffffff" font-family="Consolas, monospace" font-size="18" font-weight="700">40 : F</text>
+
+  <text x="180" y="222" text-anchor="middle" fill="#5b7863" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="13">20보다 작음</text>
+  <text x="450" y="222" text-anchor="middle" fill="#5b7863" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="13">20과 40 사이</text>
+  <text x="720" y="222" text-anchor="middle" fill="#5b7863" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="13">40보다 큼</text>
+  <g fill="#ffffff" stroke="#cadfcd" stroke-width="2">
+    <rect x="62" y="236" width="236" height="56" rx="11"/>
+    <rect x="332" y="236" width="236" height="56" rx="11"/>
+    <rect x="602" y="236" width="236" height="56" rx="11"/>
+  </g>
+  <g stroke="#dce8dc" stroke-width="1.5"><line x1="180" y1="246" x2="180" y2="282"/><line x1="450" y1="246" x2="450" y2="282"/><line x1="720" y1="246" x2="720" y2="282"/></g>
+  <g fill="#315d40" font-family="Consolas, monospace" font-size="16" font-weight="700" text-anchor="middle">
+    <text x="121" y="271">10 : A</text><text x="239" y="271">15 : B</text>
+    <text x="391" y="271">25 : D</text><text x="509" y="271">30 : E</text>
+    <text x="661" y="271">45 : G</text><text x="779" y="271">50 : H</text>
+  </g>
+  <rect x="37" y="329" width="826" height="76" rx="12" fill="#e2edda"/>
+  <text x="58" y="353" fill="#50745c" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="13" font-weight="700">키 순회 결과 · 오름차순</text>
+  <text x="58" y="385" fill="#284b35" font-family="Consolas, monospace" font-size="17" font-weight="700">10 → 15 → 20 → 25 → 30 → 40 → 45 → 50</text>
+</svg>

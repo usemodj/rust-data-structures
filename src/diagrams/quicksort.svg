@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 900 440">
+  <title>퀵 정렬의 3-way 분할</title>
+  <desc>입력 5, 2, 5, 8, 3, 5에서 피벗 5를 선택하고 작은 값, 피벗과 같은 값, 큰 값의 세 구간으로 분할한다. 같은 값 구간의 원래 순서는 보장하지 않는다.</desc>
+  <rect width="900" height="440" fill="#f2f8f4"/>
+  <g font-family="sans-serif" fill="#173b2b">
+    <text x="450" y="42" text-anchor="middle" font-size="29" font-weight="bold">퀵 정렬: 피벗 기준 3-way 분할</text>
+    <text x="450" y="80" text-anchor="middle" font-size="21">피벗 = 5 · 각 값과 비교해 세 구간으로 보낸다</text>
+    <text x="90" y="122" font-size="20">입력</text>
+    <g stroke="#2d6a4f" stroke-width="2"><rect x="90" y="140" width="110" height="52" rx="8" fill="#d8eee0"/><rect x="200" y="140" width="110" height="52" rx="8" fill="#d8eee0"/><rect x="310" y="140" width="110" height="52" rx="8" fill="#d8eee0"/><rect x="420" y="140" width="110" height="52" rx="8" fill="#d8eee0"/><rect x="530" y="140" width="110" height="52" rx="8" fill="#d8eee0"/><rect x="640" y="140" width="110" height="52" rx="8" fill="#d8eee0"/></g>
+    <g font-size="24" text-anchor="middle"><text x="145" y="174">5</text><text x="255" y="174">2</text><text x="365" y="174">5</text><text x="475" y="174">8</text><text x="585" y="174">3</text><text x="695" y="174">5</text></g>
+    <path d="M450 204v48" stroke="#40916c" stroke-width="5"/><path d="m438 238 12 16 12-16" fill="none" stroke="#40916c" stroke-width="5"/>
+    <g stroke="#2d6a4f" stroke-width="2"><rect x="90" y="278" width="210" height="64" rx="8" fill="#d8eee0"/><rect x="300" y="278" width="300" height="64" rx="8" fill="#b7dfc5"/><rect x="600" y="278" width="150" height="64" rx="8" fill="#d8eee0"/></g>
+    <text x="195" y="306" text-anchor="middle" font-size="20">작은 값 (&lt; 5)</text><text x="195" y="331" text-anchor="middle" font-size="22">2  3</text>
+    <text x="450" y="306" text-anchor="middle" font-size="20">같은 값 (= 5)</text><text x="450" y="331" text-anchor="middle" font-size="22">5  5  5</text>
+    <text x="675" y="306" text-anchor="middle" font-size="20">큰 값 (&gt; 5)</text><text x="675" y="331" text-anchor="middle" font-size="22">8</text>
+    <text x="450" y="388" text-anchor="middle" font-size="20">작은 구간과 큰 구간만 재귀 정렬 · 같은 값의 상대 순서는 보장하지 않음</text>
+  </g>
+</svg>

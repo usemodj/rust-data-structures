@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 440" role="img" aria-labelledby="title desc">
+  <title id="title">LinkedList의 이중 연결 노드</title>
+  <desc id="desc">각 노드가 값과 이전 노드 및 다음 노드를 가리키는 개념도</desc>
+  <rect width="900" height="440" rx="24" fill="#f3fbf4"/>
+  <text x="450" y="48" text-anchor="middle" font-family="sans-serif" font-size="28" font-weight="700" fill="#174d35">LinkedList&lt;T&gt;: 이중 연결 노드</text>
+  <text x="450" y="84" text-anchor="middle" font-family="sans-serif" font-size="19" fill="#38634d">각 노드는 값과 prev·next 연결을 가지며 양끝에서 순회할 수 있습니다</text>
+  <text x="78" y="166" font-family="sans-serif" font-size="21" font-weight="700" fill="#174d35">앞</text><text x="804" y="166" font-family="sans-serif" font-size="21" font-weight="700" fill="#174d35">뒤</text>
+  <g transform="translate(145 125)"><rect width="190" height="120" rx="12" fill="#d5f0d9" stroke="#28784d" stroke-width="3"/><rect x="190" width="190" height="120" rx="12" fill="#c6e9ce" stroke="#28784d" stroke-width="3"/><rect x="380" width="190" height="120" rx="12" fill="#b7e2c1" stroke="#28784d" stroke-width="3"/>
+  <text x="95" y="48" text-anchor="middle" font-family="sans-serif" font-size="25" font-weight="700" fill="#174d35">노드 1</text><text x="95" y="83" text-anchor="middle" font-family="sans-serif" font-size="19" fill="#38634d">값 A</text><text x="285" y="48" text-anchor="middle" font-family="sans-serif" font-size="25" font-weight="700" fill="#174d35">노드 2</text><text x="285" y="83" text-anchor="middle" font-family="sans-serif" font-size="19" fill="#38634d">값 B</text><text x="475" y="48" text-anchor="middle" font-family="sans-serif" font-size="25" font-weight="700" fill="#174d35">노드 3</text><text x="475" y="83" text-anchor="middle" font-family="sans-serif" font-size="19" fill="#38634d">값 C</text></g>
+  <path d="M125 185h-42M335 160h65M525 160h65M755 185h42" stroke="#d47b24" stroke-width="4" marker-end="url(#arrow)" marker-start="url(#arrowBack)"/>
+  <text x="450" y="290" text-anchor="middle" font-family="sans-serif" font-size="22" font-weight="700" fill="#a25a13">prev ↔ next</text>
+  <text x="450" y="332" text-anchor="middle" font-family="sans-serif" font-size="19" fill="#38634d">그림은 개념 모델이며 실제 표준 라이브러리 노드 배치·포인터 표현을 그대로 묘사하지 않습니다</text>
+  <text x="450" y="382" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#38634d">노드가 흩어져 있어 순차 접근의 캐시 지역성이 낮을 수 있습니다</text>
+  <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0 0 L9 3 L0 6 Z" fill="#d47b24"/></marker><marker id="arrowBack" markerWidth="10" markerHeight="10" refX="2" refY="3" orient="auto"><path d="M9 0 L0 3 L9 6 Z" fill="#d47b24"/></marker></defs>
+</svg>

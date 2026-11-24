@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 440" role="img" aria-labelledby="title desc">
+  <title id="title">0/1 배낭의 선택과 용량</title>
+  <desc id="desc">용량 5인 배낭에 무게 3 가치 9와 무게 2 가치 6인 물건을 선택한다. 총 무게 5, 총 가치 15이며 무게 4 가치 12인 물건은 선택하지 않는다.</desc>
+  <rect x="1" y="1" width="898" height="438" rx="18" fill="#f4f8ef" stroke="#d8e6d5" stroke-width="2"/>
+  <text x="450" y="42" text-anchor="middle" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="25" font-weight="700" fill="#285d43">0/1 배낭 · 각 물건은 한 번만 선택</text>
+  <rect x="28" y="68" width="370" height="320" rx="16" fill="#e8f3e7" stroke="#a4c9ac" stroke-width="2"/>
+  <text x="213" y="103" text-anchor="middle" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="20" font-weight="700" fill="#285d43">물건 후보 (무게, 가치)</text>
+  <g font-family="Arial, 'Malgun Gothic', sans-serif" font-size="19" fill="#173b2b"><rect x="57" y="126" width="312" height="55" rx="10" fill="#cfe8d2"/><text x="80" y="161">물건 A · (3, 9)</text><text x="340" y="161" text-anchor="end">선택</text><rect x="57" y="196" width="312" height="55" rx="10" fill="#cfe8d2"/><text x="80" y="231">물건 B · (2, 6)</text><text x="340" y="231" text-anchor="end">선택</text><rect x="57" y="266" width="312" height="55" rx="10" fill="#f7dfc2"/><text x="80" y="301">물건 C · (4, 12)</text><text x="340" y="301" text-anchor="end" fill="#80501f">미선택</text></g>
+  <path d="M400 227 H445" stroke="#276d4c" stroke-width="4" marker-end="url(#arrow)"/>
+  <rect x="460" y="68" width="412" height="320" rx="16" fill="#fff" stroke="#a4c9ac" stroke-width="2"/>
+  <text x="666" y="103" text-anchor="middle" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="20" font-weight="700" fill="#285d43">배낭 결과</text>
+  <path d="M545 170 Q545 145 570 145 H762 Q787 145 787 170 V303 Q787 333 757 333 H575 Q545 333 545 303 Z" fill="#e2f1e2" stroke="#276d4c" stroke-width="4"/>
+  <path d="M625 145 Q625 112 666 112 Q707 112 707 145" fill="none" stroke="#276d4c" stroke-width="6"/>
+  <rect x="565" y="210" width="202" height="43" rx="9" fill="#cfe8d2"/><text x="666" y="238" text-anchor="middle" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="19" fill="#173b2b">A + B · 무게 3 + 2</text>
+  <text x="666" y="281" text-anchor="middle" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="21" font-weight="700" fill="#285d43">총 무게 5 / 용량 5</text>
+  <text x="666" y="315" text-anchor="middle" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="21" font-weight="700" fill="#285d43">총 가치 9 + 6 = 15</text>
+  <text x="666" y="365" text-anchor="middle" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="17" fill="#4b6955">쪼개기·반복 선택 없음 (0/1)</text>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#276d4c"/></marker></defs>
+</svg>

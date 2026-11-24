@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 900 440">
+  <title>삽입 정렬의 원소 이동</title>
+  <desc>2, 4로 정렬된 접두부에 값 3을 삽입한다. 4를 오른쪽으로 한 칸 이동한 뒤 빈 자리에 3을 넣어 2, 3, 4를 만든다.</desc>
+  <rect width="900" height="440" fill="#f2f8f4"/>
+  <g font-family="sans-serif" fill="#173b2b">
+    <text x="450" y="44" text-anchor="middle" font-size="29" font-weight="bold">삽입 정렬: 빈자리를 만들고 값 삽입</text>
+    <text x="450" y="88" text-anchor="middle" font-size="21">정렬된 접두부 [2, 4]에 다음 값 3을 삽입</text>
+    <g stroke="#2d6a4f" stroke-width="2"><rect x="170" y="120" width="150" height="64" rx="8" fill="#b7dfc5"/><rect x="320" y="120" width="150" height="64" rx="8" fill="#b7dfc5"/><rect x="470" y="120" width="150" height="64" rx="8" fill="#d8eee0"/></g>
+    <text x="245" y="160" text-anchor="middle" font-size="27">2</text><text x="395" y="160" text-anchor="middle" font-size="27">4</text><text x="545" y="160" text-anchor="middle" font-size="27">3</text>
+    <path d="M395 198v58" stroke="#40916c" stroke-width="5"/><path d="m383 244 12 16 12-16" fill="none" stroke="#40916c" stroke-width="5"/><text x="395" y="232" text-anchor="middle" font-size="19">4를 오른쪽으로 이동</text>
+    <g stroke="#2d6a4f" stroke-width="2"><rect x="170" y="280" width="150" height="64" rx="8" fill="#b7dfc5"/><rect x="320" y="280" width="150" height="64" rx="8" fill="#edf5ef" stroke-dasharray="7 5"/><rect x="470" y="280" width="150" height="64" rx="8" fill="#b7dfc5"/></g>
+    <text x="245" y="320" text-anchor="middle" font-size="27">2</text><text x="395" y="320" text-anchor="middle" font-size="22">빈자리</text><text x="545" y="320" text-anchor="middle" font-size="27">4</text>
+    <path d="M545 354v34H395" fill="none" stroke="#40916c" stroke-width="4"/><path d="m407 376-14 12 14 12" fill="none" stroke="#40916c" stroke-width="4"/><text x="450" y="414" text-anchor="middle" font-size="22" font-weight="bold">3을 삽입 → 2  3  4</text>
+  </g>
+</svg>

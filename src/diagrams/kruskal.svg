@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 440" role="img" aria-labelledby="title desc">
+  <title id="title">크루스칼의 사이클 판정과 최소 신장 트리</title>
+  <desc id="desc">간선을 가중치 순서로 검사한다. 1, 2, 4 가중치 간선은 선택하고 3 가중치 간선은 사이클을 만들어 거절하여 총 가중치 7의 MST를 만든다.</desc>
+  <rect x="1" y="1" width="898" height="438" rx="18" fill="#f4f8ef" stroke="#d8e6d5" stroke-width="2"/>
+  <text x="450" y="42" text-anchor="middle" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="25" font-weight="700" fill="#285d43">크루스칼 · 간선 정렬 → 사이클 검사 → MST</text>
+  <rect x="28" y="67" width="310" height="320" rx="16" fill="#e8f3e7" stroke="#a4c9ac" stroke-width="2"/>
+  <text x="183" y="101" text-anchor="middle" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="20" font-weight="700" fill="#285d43">가중치 오름차순 후보</text>
+  <g font-family="Arial, 'Malgun Gothic', sans-serif" font-size="19" fill="#173b2b">
+    <rect x="55" y="125" width="256" height="45" rx="9" fill="#cfe8d2"/><text x="75" y="154">① A—B</text><text x="285" y="154" text-anchor="end">1 · 선택</text>
+    <rect x="55" y="183" width="256" height="45" rx="9" fill="#cfe8d2"/><text x="75" y="212">② B—C</text><text x="285" y="212" text-anchor="end">2 · 선택</text>
+    <rect x="55" y="241" width="256" height="45" rx="9" fill="#f7dfc2"/><text x="75" y="270">③ A—C</text><text x="285" y="270" text-anchor="end" fill="#80501f">3 · 사이클 거절</text>
+    <rect x="55" y="299" width="256" height="45" rx="9" fill="#cfe8d2"/><text x="75" y="328">④ C—D</text><text x="285" y="328" text-anchor="end">4 · 선택</text>
+  </g>
+  <path d="M338 227 H390" stroke="#276d4c" stroke-width="4" marker-end="url(#arrow)"/>
+  <rect x="405" y="67" width="467" height="320" rx="16" fill="#fff" stroke="#a4c9ac" stroke-width="2"/>
+  <text x="638" y="101" text-anchor="middle" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="20" font-weight="700" fill="#285d43">선택된 최소 신장 트리</text>
+  <g stroke="#276d4c" stroke-width="7" fill="none"><path d="M505 188 L638 137"/><path d="M638 137 L773 188"/><path d="M773 188 L638 303"/></g>
+  <g fill="#fff" stroke="#276d4c" stroke-width="4"><circle cx="505" cy="188" r="32"/><circle cx="638" cy="137" r="32"/><circle cx="773" cy="188" r="32"/><circle cx="638" cy="303" r="32"/></g>
+  <g fill="#173b2b" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="22" font-weight="700" text-anchor="middle"><text x="505" y="196">A</text><text x="638" y="145">B</text><text x="773" y="196">C</text><text x="638" y="311">D</text></g>
+  <g fill="#285d43" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="18" font-weight="700"><text x="566" y="155">1</text><text x="700" y="155">2</text><text x="720" y="260">4</text></g>
+  <text x="638" y="363" text-anchor="middle" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="19" fill="#285d43">간선 3개 · 총 가중치 7 · 사이클 없음</text>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#276d4c"/></marker></defs>
+</svg>

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 440" role="img" aria-labelledby="title desc">
+  <title id="title">HashSet 중복 없는 해시 집합</title>
+  <desc id="desc">값이 해시 버킷으로 가고 같은 값은 중복 삽입되지 않는 개념도</desc>
+  <rect width="900" height="440" fill="#f2fbf4"/>
+  <text x="450" y="42" text-anchor="middle" font-size="26" font-weight="bold" fill="#174d35">HashSet: 값의 존재 여부와 중복 제거</text>
+  <g font-family="sans-serif" font-size="19" fill="#173b2b">
+    <rect x="55" y="115" width="190" height="210" rx="16" fill="#d5f1df" stroke="#3b8f62" stroke-width="3"/><text x="150" y="150" text-anchor="middle" font-weight="bold">입력 값</text>
+    <rect x="82" y="173" width="136" height="42" rx="8" fill="#fff" stroke="#78b997"/><text x="150" y="201" text-anchor="middle">"rust"</text><rect x="82" y="230" width="136" height="42" rx="8" fill="#fff" stroke="#78b997"/><text x="150" y="258" text-anchor="middle">"rust"</text>
+    <path d="M245 190 H340 M245 250 H340" stroke="#28744b" stroke-width="4" marker-end="url(#arrow)"/>
+    <rect x="340" y="145" width="190" height="150" rx="16" fill="#cce8f5" stroke="#397da0" stroke-width="3"/><text x="435" y="180" text-anchor="middle" font-weight="bold">Hash + Eq</text><text x="435" y="220" text-anchor="middle">버킷 위치 계산</text><text x="435" y="262" text-anchor="middle">동일성 확인</text>
+    <path d="M530 220 H615" stroke="#28744b" stroke-width="4" marker-end="url(#arrow)"/>
+    <rect x="615" y="85" width="230" height="280" rx="16" fill="#fff4d6" stroke="#c79835" stroke-width="3"/><text x="730" y="120" text-anchor="middle" font-weight="bold">중복 없는 저장</text>
+    <rect x="650" y="150" width="160" height="45" rx="8" fill="#fff" stroke="#78b997"/><text x="730" y="180" text-anchor="middle">rust ✓</text><rect x="650" y="215" width="160" height="45" rx="8" fill="#f8d7d0" stroke="#bf6657"/><text x="730" y="245" text-anchor="middle">rust ✕ 중복</text><text x="730" y="307" text-anchor="middle" fill="#356451">충돌은 비교로 구분</text>
+  </g>
+  <text x="450" y="410" text-anchor="middle" font-size="17" fill="#356451">개념도: 삽입 순서와 실제 버킷 배치는 보장되지 않습니다.</text>
+  <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#28744b"/></marker></defs>
+</svg>

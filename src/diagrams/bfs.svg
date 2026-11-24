@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 440" role="img" aria-labelledby="title desc">
+  <title id="title">너비 우선 탐색의 큐와 레벨</title>
+  <desc id="desc">시작 정점 A에서 큐를 사용해 같은 레벨을 먼저 방문하는 BFS 흐름</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#287b57"/></marker></defs>
+  <rect width="900" height="440" rx="18" fill="#f1faf4"/>
+  <text x="450" y="38" text-anchor="middle" font-size="24" font-weight="700" fill="#174c38">BFS: 큐로 레벨 순회</text>
+  <rect x="30" y="65" width="500" height="330" rx="16" fill="#d9f2df" stroke="#69a982" stroke-width="2"/>
+  <text x="280" y="98" text-anchor="middle" font-size="20" font-weight="700" fill="#24583f">방문 순서와 레벨</text>
+  <g stroke="#287b57" stroke-width="3" fill="none" marker-end="url(#arrow)"><path d="M130 178L270 140"/><path d="M130 178L270 260"/><path d="M310 140L450 100"/><path d="M310 140L450 180"/><path d="M310 260L450 300"/></g>
+  <g fill="#fff" stroke="#287b57" stroke-width="3"><circle cx="100" cy="185" r="32"/><circle cx="300" cy="140" r="32"/><circle cx="300" cy="265" r="32"/><circle cx="480" cy="100" r="32"/><circle cx="480" cy="185" r="32"/><circle cx="480" cy="305" r="32"/></g>
+  <g text-anchor="middle" font-size="20" font-weight="700" fill="#174c38"><text x="100" y="192">A</text><text x="300" y="147">B</text><text x="300" y="272">C</text><text x="480" y="107">D</text><text x="480" y="192">E</text><text x="480" y="312">F</text></g>
+  <g font-size="17" fill="#31554a"><text x="55" y="350">0단계</text><text x="255" y="350">1단계</text><text x="445" y="350">2단계</text></g>
+  <rect x="560" y="65" width="310" height="330" rx="16" fill="#e6f0ff" stroke="#7398c7" stroke-width="2"/>
+  <text x="715" y="98" text-anchor="middle" font-size="20" font-weight="700" fill="#254d78">큐 상태</text>
+  <g font-size="19" fill="#254d78"><rect x="590" y="125" width="250" height="52" rx="8" fill="#fff" stroke="#7398c7"/><text x="610" y="158">초기: [ A ]</text><rect x="590" y="192" width="250" height="52" rx="8" fill="#fff" stroke="#7398c7"/><text x="610" y="225">A 처리: [ B, C ]</text><rect x="590" y="259" width="250" height="52" rx="8" fill="#fff" stroke="#7398c7"/><text x="610" y="292">B 처리: [ C, D, E ]</text><rect x="590" y="326" width="250" height="52" rx="8" fill="#fff" stroke="#7398c7"/><text x="610" y="359">완료: [ ]</text></g>
+</svg>

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 900 440">
+  <title>정렬된 배열에서 두 포인터로 목표 합 찾기</title>
+  <desc>1, 2, 4, 8, 11 배열에서 왼쪽과 오른쪽 포인터를 이동해 2와 8의 합 10을 찾는 과정</desc>
+  <rect width="900" height="440" fill="#f2f8f4"/>
+  <g font-family="sans-serif" fill="#173b2b">
+    <text x="60" y="58" font-size="28" font-weight="700">정렬된 배열 · 목표 합 10</text>
+    <text x="60" y="94" font-size="20">작으면 왼쪽 ↑, 크면 오른쪽 ↓</text>
+    <g stroke="#286044" stroke-width="2">
+      <rect x="95" y="150" width="130" height="76" rx="10" fill="#d9eee1"/><rect x="225" y="150" width="130" height="76" fill="#d9eee1"/><rect x="355" y="150" width="130" height="76" fill="#d9eee1"/><rect x="485" y="150" width="130" height="76" fill="#d9eee1"/><rect x="615" y="150" width="130" height="76" rx="10" fill="#d9eee1"/>
+    </g>
+    <g font-size="28" text-anchor="middle"><text x="160" y="198">1</text><text x="290" y="198">2</text><text x="420" y="198">4</text><text x="550" y="198">8</text><text x="680" y="198">11</text></g>
+    <g font-size="19" text-anchor="middle" font-weight="700"><text x="160" y="130">L</text><text x="680" y="130">R</text></g>
+    <path d="M160 120v-28 M680 120v-28" stroke="#1c7c54" stroke-width="5"/>
+    <path d="M160 92h520" stroke="#1c7c54" stroke-width="3" marker-end="url(#a)"/>
+    <text x="60" y="285" font-size="22">1 + 11 = 12  →  너무 큼 → R을 왼쪽으로</text>
+    <text x="60" y="325" font-size="22">1 + 8 = 9  →  너무 작음 → L을 오른쪽으로</text>
+    <rect x="215" y="350" width="470" height="54" rx="27" fill="#b9dfc8" stroke="#286044" stroke-width="2"/>
+    <text x="450" y="385" text-anchor="middle" font-size="24" font-weight="700">2 + 8 = 10  ✓  (인덱스 1, 3)</text>
+  </g>
+  <defs><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#1c7c54"/></marker></defs>
+</svg>

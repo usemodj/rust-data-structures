@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 550" role="img" aria-labelledby="title desc">
+  <title id="title">이진 검색의 upper bound</title>
+  <desc id="desc">정렬된 배열 1, 2, 2, 2, 5, 8에서 목표 2의 lower bound는 인덱스 1이고 upper bound는 2보다 큰 첫 값 5의 인덱스 4입니다. 탐색 범위는 [0, 6), [4, 6), [4, 5), [4, 4) 순서로 줄어듭니다.</desc>
+  <rect x="1" y="1" width="998" height="548" rx="18" fill="#f4f8ef" stroke="#d8e6d5" stroke-width="2"/>
+  <g font-family="Arial, 'Malgun Gothic', sans-serif" text-anchor="middle">
+    <text x="500" y="42" fill="#285d43" font-size="25" font-weight="700">Upper bound · 목표보다 큰 첫 위치</text>
+    <text x="500" y="73" fill="#506e59" font-size="18">정렬 배열 [1, 2, 2, 2, 5, 8] · 목표 2</text>
+    <g fill="#506e59" font-size="15"><text x="235" y="104">인덱스 0</text><text x="335" y="104">1</text><text x="435" y="104">2</text><text x="535" y="104">3</text><text x="635" y="104">4</text><text x="735" y="104">5</text></g>
+    <rect x="190" y="114" width="90" height="58" rx="8" fill="#fff" stroke="#afc9b3" stroke-width="2"/>
+    <rect x="290" y="114" width="90" height="58" rx="8" fill="#e2f0e2" stroke="#68a078" stroke-width="2"/>
+    <rect x="390" y="114" width="90" height="58" rx="8" fill="#e2f0e2" stroke="#68a078" stroke-width="2"/>
+    <rect x="490" y="114" width="90" height="58" rx="8" fill="#e2f0e2" stroke="#68a078" stroke-width="2"/>
+    <rect x="590" y="114" width="90" height="58" rx="8" fill="#fff1dc" stroke="#b8622e" stroke-width="3"/>
+    <rect x="690" y="114" width="90" height="58" rx="8" fill="#fff" stroke="#afc9b3" stroke-width="2"/>
+    <g fill="#173b2b" font-family="Consolas, monospace" font-size="24" font-weight="700"><text x="235" y="152">1</text><text x="335" y="152">2</text><text x="435" y="152">2</text><text x="535" y="152">2</text><text x="635" y="152">5</text><text x="735" y="152">8</text></g>
+    <path d="M335 183 v15 M635 183 v15" stroke="#688e71" stroke-width="2"/>
+    <text x="335" y="219" fill="#285d43" font-size="16">lower bound = 1</text>
+    <text x="635" y="219" fill="#a44919" font-size="16" font-weight="700">upper bound = 4</text>
+    <text x="485" y="246" fill="#506e59" font-size="16">2와 같은 값의 범위는 [1, 4)</text>
+  </g>
+  <rect x="50" y="266" width="900" height="239" rx="14" fill="#fff" stroke="#cfdfce" stroke-width="2"/>
+  <g font-family="Arial, 'Malgun Gothic', sans-serif" fill="#285d43">
+    <text x="79" y="302" font-size="19" font-weight="700">반열린 탐색 범위 [left, right)</text>
+    <g font-size="17">
+      <text x="79" y="340">① [0, 6) · middle = 3 · 값 2 ≤ 목표 2</text><text x="671" y="340">left = 4</text>
+      <text x="79" y="379">② [4, 6) · middle = 5 · 값 8 &gt; 목표 2</text><text x="671" y="379">right = 5</text>
+      <text x="79" y="418">③ [4, 5) · middle = 4 · 값 5 &gt; 목표 2</text><text x="671" y="418">right = 4</text>
+      <text x="79" y="468" font-weight="700">종료: [4, 4) · upper bound = 4</text>
+    </g>
+  </g>
+</svg>

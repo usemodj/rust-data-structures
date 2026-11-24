@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 440" role="img" aria-labelledby="title desc">
+  <title id="title">깊이 우선 탐색의 스택</title>
+  <desc id="desc">A에서 시작해 스택의 마지막 이웃을 먼저 꺼내 A, B, D, E, C, F 순서로 깊게 방문하는 DFS</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#287b57"/></marker></defs>
+  <rect width="900" height="440" rx="18" fill="#f1faf4"/><text x="450" y="38" text-anchor="middle" font-size="24" font-weight="700" fill="#174c38">DFS: 스택으로 깊게 탐색</text>
+  <rect x="30" y="65" width="530" height="330" rx="16" fill="#d9f2df" stroke="#69a982" stroke-width="2"/><text x="295" y="98" text-anchor="middle" font-size="20" font-weight="700" fill="#24583f">방문 순서</text>
+  <g stroke="#287b57" stroke-width="3" fill="none" marker-end="url(#arrow)"><path d="M120 200L265 145"/><path d="M120 200L265 285"/><path d="M300 145L450 105"/><path d="M300 145L450 205"/><path d="M300 285L450 325"/></g>
+  <g fill="#fff" stroke="#287b57" stroke-width="3"><circle cx="90" cy="205" r="32"/><circle cx="295" cy="145" r="32"/><circle cx="295" cy="285" r="32"/><circle cx="480" cy="105" r="32"/><circle cx="480" cy="205" r="32"/><circle cx="480" cy="325" r="32"/></g>
+  <g text-anchor="middle" font-size="20" font-weight="700" fill="#174c38"><text x="90" y="212">A</text><text x="295" y="152">B</text><text x="295" y="292">C</text><text x="480" y="112">D</text><text x="480" y="212">E</text><text x="480" y="332">F</text></g>
+  <g font-size="17" fill="#31554a"><text x="60" y="370">1 A</text><text x="220" y="370">2 B</text><text x="380" y="370">3 D</text><text x="485" y="370">4 E → 5 C → 6 F</text></g>
+  <rect x="590" y="65" width="280" height="330" rx="16" fill="#e6f0ff" stroke="#7398c7" stroke-width="2"/><text x="730" y="98" text-anchor="middle" font-size="20" font-weight="700" fill="#254d78">스택 (top)</text>
+  <g font-size="19" text-anchor="middle" fill="#254d78"><rect x="635" y="125" width="190" height="48" rx="8" fill="#fff" stroke="#7398c7"/><text x="730" y="156">[ A ]</text><rect x="635" y="185" width="190" height="48" rx="8" fill="#fff" stroke="#7398c7"/><text x="730" y="216">[ C, B ]</text><rect x="635" y="245" width="190" height="48" rx="8" fill="#fff" stroke="#7398c7"/><text x="730" y="276">[ C, E, D ]</text><rect x="635" y="305" width="190" height="48" rx="8" fill="#fff" stroke="#7398c7"/><text x="730" y="336">[ C ] → [ F ] → [ ]</text></g>
+</svg>

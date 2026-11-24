@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 440" role="img" aria-labelledby="title desc">
+  <title id="title">유향 그래프와 인접 리스트</title>
+  <desc id="desc">A에서 B, B에서 C, A에서 C로 향하는 그래프와 같은 간선을 나타내는 인접 리스트</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#a25b35"/></marker></defs>
+  <rect width="900" height="440" rx="18" fill="#f1faf4"/>
+  <text x="450" y="38" text-anchor="middle" font-size="24" font-weight="700" fill="#174c38">그래프와 인접 리스트</text>
+  <rect x="35" y="65" width="400" height="320" rx="16" fill="#d9f2df" stroke="#69a982" stroke-width="2"/>
+  <rect x="465" y="65" width="400" height="320" rx="16" fill="#e6f0ff" stroke="#7398c7" stroke-width="2"/>
+  <text x="235" y="100" text-anchor="middle" font-size="20" font-weight="700" fill="#24583f">유향 그래프</text>
+  <text x="665" y="100" text-anchor="middle" font-size="20" font-weight="700" fill="#254d78">인접 리스트</text>
+  <g stroke="#a25b35" stroke-width="3" fill="none" marker-end="url(#arrow)"><path d="M125 185L255 150"/><path d="M125 185L255 275"/><path d="M255 150L255 275"/></g>
+  <g fill="#fff" stroke="#a25b35" stroke-width="3"><circle cx="105" cy="190" r="30"/><circle cx="275" cy="145" r="30"/><circle cx="275" cy="290" r="30"/></g>
+  <g text-anchor="middle" font-size="20" font-weight="700" fill="#743d27"><text x="105" y="197">A</text><text x="275" y="152">B</text><text x="275" y="297">C</text></g>
+  <g font-size="20" fill="#254d78"><rect x="500" y="125" width="330" height="58" rx="8" fill="#fff" stroke="#7398c7"/><rect x="500" y="193" width="330" height="58" rx="8" fill="#fff" stroke="#7398c7"/><rect x="500" y="261" width="330" height="58" rx="8" fill="#fff" stroke="#7398c7"/><text x="525" y="162" font-weight="700">A</text><text x="575" y="162">→ [ B, C ]</text><text x="525" y="230" font-weight="700">B</text><text x="575" y="230">→ [ C ]</text><text x="525" y="298" font-weight="700">C</text><text x="575" y="298">→ [ ]</text></g>
+  <text x="450" y="420" text-anchor="middle" font-size="17" fill="#31554a">그래프의 세 간선 A→B, A→C, B→C가 리스트에도 동일하게 보존됩니다.</text>
+</svg>

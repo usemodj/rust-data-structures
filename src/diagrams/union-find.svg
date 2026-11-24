@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 440" role="img" aria-labelledby="title desc">
+  <title id="title">서로소 집합과 경로 압축</title>
+  <desc id="desc">집합 A의 원소 0, 2, 3은 루트 1을 가리킵니다. 집합 B에서 4는 5를, 5는 루트 6을 가리키며 find 후 4가 6을 직접 가리킵니다.</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#276d4c"/></marker><marker id="after" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#b76a1b"/></marker></defs>
+  <rect x="1" y="1" width="898" height="438" rx="18" fill="#f4f8ef" stroke="#d8e6d5" stroke-width="2"/>
+  <text x="450" y="40" text-anchor="middle" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="24" font-weight="700" fill="#285d43">Union-Find · 서로소 집합과 경로 압축</text>
+  <rect x="35" y="62" width="400" height="315" rx="16" fill="#e2f1e2" stroke="#a4c9ac" stroke-width="2"/>
+  <rect x="465" y="62" width="400" height="315" rx="16" fill="#e8f1fa" stroke="#a9bfd5" stroke-width="2"/>
+  <text x="235" y="95" text-anchor="middle" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="20" font-weight="700" fill="#285d43">집합 A</text>
+  <text x="665" y="95" text-anchor="middle" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="20" font-weight="700" fill="#254d78">집합 B</text>
+  <g stroke="#276d4c" stroke-width="3" fill="none" marker-end="url(#arrow)"><path d="M145 266 L220 168"/><path d="M235 260 L235 175"/><path d="M325 266 L250 168"/><path d="M560 170 L645 226"/><path d="M690 262 L755 319"/></g>
+  <path d="M543 172 C535 320 650 374 744 345" fill="none" stroke="#b76a1b" stroke-width="3" stroke-dasharray="8 6" marker-end="url(#after)"/>
+  <g fill="#fff" stroke="#276d4c" stroke-width="3"><circle cx="235" cy="145" r="30"/><circle cx="130" cy="290" r="30"/><circle cx="235" cy="290" r="30"/><circle cx="340" cy="290" r="30"/><circle cx="545" cy="145" r="30"/><circle cx="670" cy="245" r="30"/><circle cx="775" cy="340" r="30"/></g>
+  <g fill="#173b2b" font-family="Consolas, monospace" font-size="22" font-weight="700" text-anchor="middle"><text x="235" y="152">1</text><text x="130" y="297">0</text><text x="235" y="297">2</text><text x="340" y="297">3</text><text x="545" y="152">4</text><text x="670" y="252">5</text><text x="775" y="347">6</text></g>
+  <text x="235" y="205" text-anchor="middle" fill="#315d40" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="18">대표: 1</text>
+  <text x="775" y="290" text-anchor="middle" fill="#254d78" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="18">대표: 6</text>
+  <text x="510" y="325" fill="#80501f" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="17">점선: find(4) 후 4 → 6</text>
+  <text x="450" y="414" text-anchor="middle" fill="#4b6955" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="17">화살표는 부모 포인터이며 두 집합은 서로 연결되지 않습니다.</text>
+</svg>

@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 550" role="img" aria-labelledby="title desc">
+  <title id="title">이진 검색 트리의 후위 순회와 레벨 순회</title>
+  <desc id="desc">두 그림은 루트 8, 왼쪽 자식 3과 오른쪽 자식 12, 그 아래 1, 6, 10, 15로 이루어진 같은 트리입니다. 후위 순회 결과는 1, 6, 3, 10, 15, 12, 8이고 레벨 순회 결과는 8, 3, 12, 1, 6, 10, 15입니다. 각 노드의 작은 숫자는 방문 순서입니다.</desc>
+  <rect x="1" y="1" width="998" height="548" rx="18" fill="#f4f8ef" stroke="#d8e6d5" stroke-width="2"/>
+  <text x="500" y="42" text-anchor="middle" fill="#285d43" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="25" font-weight="700">같은 트리, 다른 방문 순서</text>
+  <text x="500" y="74" text-anchor="middle" fill="#506e59" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="18">노드의 작은 번호는 해당 순회에서 방문하는 순서입니다</text>
+  <rect x="24" y="94" width="464" height="418" rx="15" fill="#ffffff" stroke="#cfdfce" stroke-width="2"/>
+  <rect x="512" y="94" width="464" height="418" rx="15" fill="#ffffff" stroke="#cfdfce" stroke-width="2"/>
+  <g font-family="Arial, 'Malgun Gothic', sans-serif" text-anchor="middle">
+    <text x="256" y="126" fill="#285d43" font-size="22" font-weight="700">후위 순회 · Post-order</text>
+    <text x="256" y="153" fill="#506e59" font-size="17">왼쪽 → 오른쪽 → 현재</text>
+    <text x="744" y="126" fill="#285d43" font-size="22" font-weight="700">레벨 순회 · Level-order</text>
+    <text x="744" y="153" fill="#506e59" font-size="17">위에서 아래, 왼쪽에서 오른쪽</text>
+  </g>
+  <g stroke="#8aad94" stroke-width="3" fill="none">
+    <path d="M256 199 L146 271 M256 199 L366 271 M146 271 L86 343 M146 271 L206 343 M366 271 L306 343 M366 271 L426 343"/>
+    <path d="M744 199 L634 271 M744 199 L854 271 M634 271 L574 343 M634 271 L694 343 M854 271 L794 343 M854 271 L914 343"/>
+  </g>
+  <g fill="#f1f8f0" stroke="#33805b" stroke-width="2.5">
+    <circle cx="256" cy="195" r="26"/><circle cx="146" cy="270" r="26"/><circle cx="366" cy="270" r="26"/><circle cx="86" cy="345" r="26"/><circle cx="206" cy="345" r="26"/><circle cx="306" cy="345" r="26"/><circle cx="426" cy="345" r="26"/>
+    <circle cx="744" cy="195" r="26"/><circle cx="634" cy="270" r="26"/><circle cx="854" cy="270" r="26"/><circle cx="574" cy="345" r="26"/><circle cx="694" cy="345" r="26"/><circle cx="794" cy="345" r="26"/><circle cx="914" cy="345" r="26"/>
+  </g>
+  <g fill="#173b2b" font-family="Consolas, monospace" font-size="20" font-weight="700" text-anchor="middle">
+    <text x="256" y="202">8</text><text x="146" y="277">3</text><text x="366" y="277">12</text><text x="86" y="352">1</text><text x="206" y="352">6</text><text x="306" y="352">10</text><text x="426" y="352">15</text>
+    <text x="744" y="202">8</text><text x="634" y="277">3</text><text x="854" y="277">12</text><text x="574" y="352">1</text><text x="694" y="352">6</text><text x="794" y="352">10</text><text x="914" y="352">15</text>
+  </g>
+  <g fill="#b8622e">
+    <circle cx="278" cy="177" r="13"/><circle cx="168" cy="252" r="13"/><circle cx="388" cy="252" r="13"/><circle cx="108" cy="327" r="13"/><circle cx="228" cy="327" r="13"/><circle cx="328" cy="327" r="13"/><circle cx="448" cy="327" r="13"/>
+    <circle cx="766" cy="177" r="13"/><circle cx="656" cy="252" r="13"/><circle cx="876" cy="252" r="13"/><circle cx="596" cy="327" r="13"/><circle cx="716" cy="327" r="13"/><circle cx="816" cy="327" r="13"/><circle cx="936" cy="327" r="13"/>
+  </g>
+  <g fill="#ffffff" font-family="Arial, sans-serif" font-size="15" font-weight="700" text-anchor="middle">
+    <text x="278" y="182">7</text><text x="168" y="257">3</text><text x="388" y="257">6</text><text x="108" y="332">1</text><text x="228" y="332">2</text><text x="328" y="332">4</text><text x="448" y="332">5</text>
+    <text x="766" y="182">1</text><text x="656" y="257">2</text><text x="876" y="257">3</text><text x="596" y="332">4</text><text x="716" y="332">5</text><text x="816" y="332">6</text><text x="936" y="332">7</text>
+  </g>
+  <g font-family="Arial, 'Malgun Gothic', sans-serif" text-anchor="middle" fill="#315d40">
+    <text x="256" y="417" font-size="17" font-weight="700">방문 결과 · 자식부터 루트까지</text>
+    <text x="256" y="448" font-size="19">1 → 6 → 3 → 10 → 15 → 12 → 8</text>
+    <text x="744" y="417" font-size="17" font-weight="700">방문 결과 · 레벨별</text>
+    <text x="744" y="448" font-size="19">8 → 3 → 12 → 1 → 6 → 10 → 15</text>
+  </g>
+</svg>
