@@ -51,13 +51,13 @@ git diff --cached
 3. 커밋하고 GitHub에 올리기
 아래 주소에서 사용자이름과 저장소이름을 실제 값으로 바꾸세요.
 
-`
+```sh
 git commit -m "Initial commit"
 git remote add origin https://github.com/사용자이름/저장소이름.git
 git push -u origin main
 ```
 
- 이후 변경 사항을 올릴 때는 다음을 실행하면 됩니다.
+이후 변경 사항을 올릴 때는 다음을 실행하면 됩니다.
 
 ```sh
 git add .
