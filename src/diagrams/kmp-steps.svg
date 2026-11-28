@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1250 1080" role="img" aria-labelledby="title desc">
+  <title id="title">KMP 단계별 비교와 겹치는 일치</title>
+  <desc id="desc">텍스트 ABABABA와 패턴 ABABA의 인덱스별 KMP 과정이다. lps는 0, 0, 1, 2, 3으로 계산되고, 텍스트 인덱스 0부터 4까지 일치한 뒤 lps[4]인 3을 재사용해 패턴을 두 칸 이동한다. 그 결과 시작 오프셋 0과 2의 겹치는 두 일치를 찾는다.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#276d4c"/>
+    </marker>
+    <style>
+      .sans { font-family: Arial, 'Malgun Gothic', sans-serif; }
+      .mono { font-family: Consolas, 'Courier New', monospace; }
+      .label { fill: #285d43; font-size: 19px; font-weight: 700; }
+      .small { fill: #405c4b; font-size: 17px; }
+      .index { fill: #173b2b; font-size: 16px; }
+    </style>
+  </defs>
+  <rect x="1" y="1" width="1248" height="1078" rx="18" fill="#f4f8ef" stroke="#d8e6d5" stroke-width="2"/>
+  <text x="625" y="42" text-anchor="middle" class="sans" font-size="28" font-weight="700" fill="#285d43">KMP 단계별 비교 · 이동 · 중복 매치</text>
+  <text x="625" y="70" text-anchor="middle" class="sans" font-size="16" fill="#4b6955">예시: text = ABABABA, pattern = ABABA (모든 위치는 바이트 오프셋)</text>
+
+  <rect x="30" y="92" width="1190" height="272" rx="16" fill="#e8f3e7" stroke="#a4c9ac" stroke-width="2"/>
+  <text x="55" y="126" class="sans label">1. 패턴의 lps 계산</text>
+  <text x="55" y="153" class="sans small">pattern[i]와 pattern[len]을 비교한다. 불일치(i=1)는 len=0이므로 i만 증가한다.</text>
+  <text x="55" y="188" class="sans label" font-size="17">패턴 인덱스</text>
+  <g class="mono" text-anchor="middle" font-size="19" font-weight="700">
+    <g fill="#fff" stroke="#276d4c" stroke-width="2">
+      <rect x="190" y="164" width="92" height="48" rx="7"/><rect x="290" y="164" width="92" height="48" rx="7"/><rect x="390" y="164" width="92" height="48" rx="7"/><rect x="490" y="164" width="92" height="48" rx="7"/><rect x="590" y="164" width="92" height="48" rx="7"/>
+    </g>
+    <text x="236" y="195">0</text><text x="336" y="195">1</text><text x="436" y="195">2</text><text x="536" y="195">3</text><text x="636" y="195">4</text>
+    <text x="55" y="247" class="sans label" text-anchor="start">문자</text>
+    <text x="236" y="247">A</text><text x="336" y="247">B</text><text x="436" y="247">A</text><text x="536" y="247">B</text><text x="636" y="247">A</text>
+    <text x="55" y="300" class="sans label" text-anchor="start">lps</text>
+    <g fill="#285d43"><text x="236" y="300">0</text><text x="336" y="300">0</text><text x="436" y="300">1</text><text x="536" y="300">2</text><text x="636" y="300">3</text></g>
+  </g>
+  <text x="735" y="198" class="sans small">i=1: B ≠ A → lps[1]=0, i=2</text>
+  <text x="735" y="229" class="sans small">i=2: A = A → len=1, lps[2]=1</text>
+  <text x="735" y="260" class="sans small">i=3: B = B → len=2, lps[3]=2</text>
+  <text x="735" y="291" class="sans small">i=4: A = A → len=3, lps[4]=3</text>
+  <path d="M686 300 C710 300 700 198 725 198" fill="none" stroke="#276d4c" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="30" y="386" width="1190" height="632" rx="16" fill="#fff" stroke="#a4c9ac" stroke-width="2"/>
+  <text x="55" y="422" class="sans label">2. 텍스트를 한 바이트씩 비교</text>
+  <text x="55" y="449" class="sans small">t는 뒤로 가지 않는다. 완전 일치 후 p를 lps[4]=3으로 바꾸면 다음 시작은 t−p=5−3=2이다.</text>
+  <g class="mono" text-anchor="middle" font-size="18">
+    <text x="86" y="489" class="sans label" text-anchor="start">text</text>
+    <g fill="#f7fbf6" stroke="#8db99a" stroke-width="1.5">
+      <rect x="190" y="462" width="92" height="40"/><rect x="290" y="462" width="92" height="40"/><rect x="390" y="462" width="92" height="40"/><rect x="490" y="462" width="92" height="40"/><rect x="590" y="462" width="92" height="40"/><rect x="690" y="462" width="92" height="40"/><rect x="790" y="462" width="92" height="40"/>
+    </g>
+    <text x="236" y="489">A</text><text x="336" y="489">B</text><text x="436" y="489">A</text><text x="536" y="489">B</text><text x="636" y="489">A</text><text x="736" y="489">B</text><text x="836" y="489">A</text>
+    <text x="86" y="527" class="sans label" text-anchor="start">t</text>
+    <g class="index"><text x="236" y="527">0</text><text x="336" y="527">1</text><text x="436" y="527">2</text><text x="536" y="527">3</text><text x="636" y="527">4</text><text x="736" y="527">5</text><text x="836" y="527">6</text></g>
+  </g>
+  <g class="sans" font-size="16" fill="#173b2b">
+    <rect x="55" y="555" width="1130" height="48" rx="8" fill="#eef7ee"/><text x="72" y="585">t=0, p=0: A=A → t=1, p=1</text>
+    <rect x="55" y="610" width="1130" height="48" rx="8" fill="#eef7ee"/><text x="72" y="640">t=1, p=1: B=B → t=2, p=2</text>
+    <rect x="55" y="665" width="1130" height="48" rx="8" fill="#eef7ee"/><text x="72" y="695">t=2, p=2: A=A → t=3, p=3</text>
+    <rect x="55" y="720" width="1130" height="48" rx="8" fill="#eef7ee"/><text x="72" y="750">t=3, p=3: B=B → t=4, p=4</text>
+    <rect x="55" y="775" width="1130" height="48" rx="8" fill="#cfe8d2" stroke="#6eaa7e"/><text x="72" y="805" font-weight="700">t=4, p=4: A=A → 일치 [0..5), 시작 0 기록 → p=lps[4]=3</text>
+    <rect x="55" y="830" width="1130" height="48" rx="8" fill="#e6f2e7"/><text x="72" y="860">t=5, p=3: B=B → t=6, p=4 (이미 앞의 ABA를 재사용)</text>
+    <rect x="55" y="885" width="1130" height="48" rx="8" fill="#b7dcbf" stroke="#4f9363"/><text x="72" y="915" font-weight="700">t=6, p=4: A=A → 일치 [2..7), 시작 2 기록 → p=lps[4]=3</text>
+    <rect x="55" y="940" width="1130" height="48" rx="8" fill="#fff5df" stroke="#d5ae66"/><text x="72" y="970">끝: t=7 → 검색 종료. 결과는 [0, 2], 두 구간 [0..5)와 [2..7)는 오프셋 2..4를 공유</text>
+  </g>
+</svg>

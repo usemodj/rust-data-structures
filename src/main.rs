@@ -227,10 +227,13 @@ fn app() -> Router {
     Router::new()
         .route("/", get(home))
         .route("/docs/{slug}", get(document))
+        .route("/docs/dijkstra-visual", get(dijkstra_visual))
         .route("/search", get(search_documents))
         .route("/style.css", get(stylesheet))
         .route("/theme.js", get(theme_script))
         .route("/sidebar.js", get(sidebar_script))
+        .route("/assets/dijkstra-algorithm-steps.png", get(dijkstra_algorithm_image))
+        .route("/assets/dijkstra-shortest-path-diagram.png", get(dijkstra_shortest_path_diagram))
         .route("/assets/{filename}", get(diagram))
         .fallback(not_found)
 }
@@ -454,7 +457,7 @@ async fn document(Path(slug): Path<String>) -> impl IntoResponse {
                 .unwrap();
             let navigation = document_navigation(index);
             let content = format!(
-                "<div class=\"doc-layout\"><div class=\"doc-toolbar\"><button id=\"sidebar-toggle\" class=\"sidebar-toggle\" type=\"button\" aria-controls=\"docs-sidebar\" aria-expanded=\"true\" hidden>메뉴 접기</button></div>{}<article class=\"article\"><div class=\"breadcrumbs\"><a href=\"/\">홈</a><span>/</span><span>{}</span></div><div class=\"doc-label\"><span class=\"dot\"></span> {} · 학습 노트 {:02}</div><div class=\"markdown\">{}</div>{}</article></div><script src=\"/sidebar.js\" defer></script>",
+                "<div class=\"doc-layout\"><div class=\"doc-navigation\"><div class=\"doc-toolbar\"><button id=\"sidebar-toggle\" class=\"sidebar-toggle\" type=\"button\" aria-controls=\"docs-sidebar\" aria-expanded=\"true\" hidden>메뉴 접기</button></div>{}</div><article class=\"article\"><div class=\"breadcrumbs\"><a href=\"/\">홈</a><span>/</span><span>{}</span></div><div class=\"doc-label\"><span class=\"dot\"></span> {} · 학습 노트 {:02}</div><div class=\"markdown\">{}</div>{}</article></div><script src=\"/sidebar.js\" defer></script>",
                 sidebar(Some(doc.slug)),
                 doc.category,
                 doc.category,
@@ -510,6 +513,44 @@ async fn diagram(Path(filename): Path<String>) -> impl IntoResponse {
     }
 }
 
+async fn dijkstra_visual() -> impl IntoResponse {
+    // Read HTML as bytes and convert to string, skipping any BOM
+    let bytes = include_bytes!("../docs/dijkstra-visual.html");
+    let html_str = if bytes.len() >= 3 && bytes[0] == 0xEF && bytes[1] == 0xBB && bytes[2] == 0xBF {
+        // Skip UTF-8 BOM
+        std::str::from_utf8(&bytes[3..]).unwrap_or_default()
+    } else {
+        std::str::from_utf8(bytes).unwrap_or_default()
+    };
+    
+    (
+        [
+            (header::CONTENT_TYPE, "text/html; charset=utf-8"),
+        ],
+        html_str,
+    )
+}
+
+async fn dijkstra_algorithm_image() -> impl IntoResponse {
+    (
+        [
+            (header::CONTENT_TYPE, "image/png"),
+            (header::CACHE_CONTROL, "public, max-age=86400"),
+        ],
+        include_bytes!("../docs/assets/dijkstra-algorithm-steps.png").to_vec(),
+    )
+}
+
+async fn dijkstra_shortest_path_diagram() -> impl IntoResponse {
+    (
+        [
+            (header::CONTENT_TYPE, "image/png"),
+            (header::CACHE_CONTROL, "public, max-age=86400"),
+        ],
+        include_bytes!("../docs/assets/dijkstra-shortest-path-diagram.png").to_vec(),
+    )
+}
+
 async fn not_found() -> (StatusCode, Html<String>) {
     let content = "<section class=\"missing\"><span class=\"eyebrow\">404 / NOT FOUND</span><h1>페이지를 찾을 수 없어요.</h1><p>주소를 확인하거나 학습 노트로 돌아가 보세요.</p><a class=\"button primary\" href=\"/\">홈으로 돌아가기 →</a></section>";
     (
@@ -543,7 +584,7 @@ fn sidebar(active: Option<&str>) -> String {
 fn layout(title: &str, content: &str, search_query: Option<&str>) -> String {
     let search_value = markdown::escape(search_query.unwrap_or(""));
     format!(
-        r#"<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Rust로 배우는 자료구조와 알고리즘 학습 노트"><title>{} | Rust 자료구조 노트</title><script src="/theme.js"></script><link rel="stylesheet" href="/style.css"></head><body><header class="header"><div class="header-inner"><a class="brand" href="/"><span class="brand-mark">R<span>.</span></span><span>RUST<span class="brand-light"> / STUDY NOTES</span></span></a><form class="header-search" action="/search" method="get" role="search"><label class="sr-only" for="global-search">문서 검색</label><input id="global-search" type="search" name="q" placeholder="문서 검색" value="{search_value}" maxlength="200"><button type="submit">검색</button></form><div class="theme-control"><label class="sr-only" for="theme-select">화면 테마</label><select id="theme-select" aria-label="화면 테마"><option value="light">밝은 테마</option><option value="dark">어두운 테마</option><option value="sepia">따뜻한 테마</option></select></div><nav aria-label="주 메뉴"><a href="/#topics">학습 노트</a><a href="https://doc.rust-lang.org/book/" target="_blank" rel="noopener noreferrer">Rust 공식 문서 ↗</a></nav></div></header><main>{}</main><footer><div><a class="brand footer-brand" href="/"><span class="brand-mark">R<span>.</span></span><span>RUST<span class="brand-light"> / STUDY NOTES</span></span></a><p>Rust로 배우는 자료구조와 알고리즘.</p></div><span>BUILT FOR CURIOUS MINDS · RUST</span></footer></body></html>"#,
+        r#"<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Rust로 배우는 자료구조와 알고리즘 학습 노트"><title>{} | Rust 자료구조 노트</title><script src="/theme.js"></script><link rel="stylesheet" href="/style.css"></head><body><header class="header"><div class="header-inner"><a class="brand" href="/"><span class="brand-mark">R<span>.</span></span><span>RUST<span class="brand-light"> / STUDY NOTES</span></span></a><form class="header-search" action="/search" method="get" role="search"><label class="sr-only" for="global-search">문서 검색</label><input id="global-search" type="search" name="q" placeholder="문서 검색" value="{search_value}" maxlength="200"><button type="submit">검색</button></form><div class="theme-control"><label class="sr-only" for="theme-select">화면 테마</label><select id="theme-select" aria-label="화면 테마"><option value="light">밝은 테마</option><option value="dark">어두운 테마</option><option value="sepia">따뜻한 테마</option></select></div><nav aria-label="주 메뉴"><a href="/#topics">학습 노트</a><a href="https://doc.rust-lang.org/book/" target="_blank" rel="noopener noreferrer">Rust 공식 문서 ↗</a></nav></div></header><main>{}</main><footer><div><a class="brand footer-brand" href="/"><span class="brand-mark">R<span>.</span></span><span>RUST<span class="brand-light"> / STUDY NOTES</span></span></a><p>Rust로 배우는 자료구조와 알고리즘.</p></div><span>BUILT FOR CURIOUS MINDS · RUST</span></footer></body><script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script><script>mermaid.initialize({{ startOnLoad: true, theme: 'default' }}); mermaid.contentLoaded();</script></html>"#,
         markdown::escape(title),
         content
     )

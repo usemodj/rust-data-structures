@@ -80,8 +80,62 @@ mod tests {
     fn rejects_out_of_range_start() {
         assert!(dfs(&[], 0).is_empty());
     }
+
+    #[test]
+    fn follows_documented_stack_states() {
+        let graph = vec![vec![1, 2], vec![0, 3], vec![0], vec![1]];
+        let mut visited = vec![false; graph.len()];
+        let mut stack = vec![0];
+        let mut order = Vec::new();
+        let mut trace = Vec::new();
+        while let Some(vertex) = stack.pop() {
+            if visited[vertex] {
+                continue;
+            }
+            visited[vertex] = true;
+            order.push(vertex);
+            for &next in graph[vertex].iter().rev() {
+                if !visited[next] {
+                    stack.push(next);
+                }
+            }
+            trace.push((vertex, stack.clone(), order.clone()));
+        }
+        assert_eq!(trace, vec![
+            (0, vec![2, 1], vec![0]),
+            (1, vec![2, 3], vec![0, 1]),
+            (3, vec![2], vec![0, 1, 3]),
+            (2, vec![], vec![0, 1, 3, 2]),
+        ]);
+        assert_eq!(dfs(&graph, 0), order);
+    }
+
+    #[test]
+    fn queued_duplicates_do_not_repeat_visits() {
+        let graph = vec![vec![1, 2], vec![2], vec![]];
+        assert_eq!(dfs(&graph, 0), vec![0, 1, 2]);
+    }
 }
 ```
+
+## DFS 예제의 스택과 방문 순서 따라가기
+
+![양방향 간선 0과 1, 0과 2, 1과 3인 그래프의 DFS에서 초기 스택은 0이고, 정점 0 처리 후 2와 1, 정점 1 처리 후 2와 3, 정점 3 처리 후 2, 정점 2 처리 후 빈 스택이며 방문 순서는 0, 1, 3, 2인 단계별 변화](/assets/dfs-stack-steps.svg)
+
+위쪽 A~F 다이어그램과 달리, 이 그림은 바로 위 Rust 예제의 `graph = vec![vec![1, 2], vec![0, 3], vec![0], vec![1]]`와 시작점 `0`을 사용합니다. 각 간선은 양쪽 인접 리스트에 들어 있으므로 `0—1`, `0—2`, `1—3`을 양방향으로 오갈 수 있습니다. **스택의 오른쪽이 맨 위(top)**이며, 각 행은 정점을 꺼내 처리한 뒤의 상태입니다.
+
+| 단계 | 처리 후 스택 | 방문 순서 | 설명 |
+| --- | --- | --- | --- |
+| 시작 | `[0]` | `[]` | 시작점을 스택에 넣지만 아직 방문 표시하지 않습니다. |
+| 0 처리 | `[2, 1]` | `[0]` | `0`을 방문하고 이웃 `[1, 2]`를 역순으로 넣습니다. |
+| 1 처리 | `[2, 3]` | `[0, 1]` | `1`을 방문하고 `3`을 넣습니다. `0`은 이미 방문하여 넣지 않습니다. |
+| 3 처리 | `[2]` | `[0, 1, 3]` | `3`을 방문합니다. 이웃 `1`은 이미 방문했습니다. |
+| 2 처리 | `[]` | `[0, 1, 3, 2]` | `2`를 방문합니다. 이웃 `0`은 이미 방문했고 스택이 비어 종료합니다. |
+
+- `0`을 처리할 때 `2`를 먼저, `1`을 나중에 넣으므로 `1`이 먼저 나옵니다. 그다음 `3`을 깊게 탐색한 뒤 스택에 남아 있던 `2`로 돌아갑니다.
+- 이 구현은 정점을 **꺼낼 때** 방문 표시합니다. 이미 방문한 이웃은 넣지 않지만, 아직 꺼내지 않은 정점은 여러 경로에서 스택에 중복으로 들어갈 수 있습니다. 나중에 중복 항목을 꺼내면 `visited[vertex]`를 확인해 건너뜁니다.
+- 예를 들어 방향 그래프 `vec![vec![1, 2], vec![2], vec![]]`에서는 `0` 처리 후 `[2, 1]`이고, `1` 처리 시 아직 방문하지 않은 `2`를 다시 넣어 `[2, 2]`가 됩니다. `2`를 처음 꺼내 방문한 뒤 남은 `2`는 건너뜁니다.
+- 위 그림의 그래프는 모든 인접 정점 번호가 유효합니다. 시작점이 범위를 벗어나면 빈 방문 순서를 반환하며, 인접 정점 번호가 잘못된 입력은 이 기본 예제에서 별도로 검사해야 합니다.
 
 PowerShell에서 파일을 `dfs_example.rs`로 저장한 뒤 다음처럼 실행할 수 있다.
 

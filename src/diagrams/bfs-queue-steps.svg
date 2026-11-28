@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 800" role="img" aria-labelledby="title desc">
+  <title id="title">BFS 예제의 단계별 큐와 거리 변화</title>
+  <desc id="desc">방향 그래프의 간선은 0에서 1과 2, 1에서 3, 2에서 3으로 이어집니다. 0에서 시작할 때 초기 큐는 0이고 거리는 0, 미발견, 미발견, 미발견입니다. 0 처리 후 큐는 1, 2이고 거리는 0, 1, 1, 미발견입니다. 1 처리 후 큐는 2, 3이고 거리는 0, 1, 1, 2입니다. 2 처리 때 정점 3은 이미 발견하여 다시 넣지 않으며 큐는 3입니다. 3 처리 후 큐는 비고 거리는 그대로입니다. 처리 순서는 0, 1, 2, 3입니다.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" markerUnits="strokeWidth"><path d="M0 0 L10 4 L0 8 Z" fill="#618c70"/></marker>
+  </defs>
+  <rect x="1" y="1" width="998" height="798" rx="18" fill="#f4f8ef" stroke="#d8e6d5" stroke-width="2"/>
+  <g font-family="Arial, 'Malgun Gothic', sans-serif" fill="#173b2b">
+    <text x="500" y="45" text-anchor="middle" fill="#285d43" font-size="25" font-weight="700">BFS · 큐와 거리의 단계별 변화</text>
+    <text x="500" y="76" text-anchor="middle" fill="#506e59" font-size="17">방향 그래프 · 시작 정점 0 · 가중치 없음</text>
+    <rect x="35" y="95" width="380" height="260" rx="14" fill="#fff" stroke="#cfdfce" stroke-width="2"/>
+    <text x="225" y="123" text-anchor="middle" fill="#285d43" font-size="18" font-weight="700">예제 그래프</text>
+    <g fill="none" stroke="#618c70" stroke-width="2.5" marker-end="url(#arrow)">
+      <path d="M210 169 L164 213"/><path d="M240 169 L286 213"/><path d="M164 247 L210 291"/><path d="M286 247 L240 291"/>
+    </g>
+    <g fill="#e2f0e2" stroke="#33805b" stroke-width="2.5"><circle cx="225" cy="150" r="24"/><circle cx="145" cy="230" r="24"/><circle cx="305" cy="230" r="24"/><circle cx="225" cy="310" r="24"/></g>
+    <g font-family="Consolas, monospace" font-size="20" font-weight="700" text-anchor="middle"><text x="225" y="157">0</text><text x="145" y="237">1</text><text x="305" y="237">2</text><text x="225" y="317">3</text></g>
+    <rect x="435" y="95" width="530" height="260" rx="14" fill="#fff" stroke="#cfdfce" stroke-width="2"/>
+    <text x="463" y="135" fill="#285d43" font-size="19" font-weight="700">큐는 앞에서 꺼내고 뒤에 넣습니다</text>
+    <text x="463" y="177" font-size="17">처리 순서: 0 → 1 → 2 → 3</text>
+    <text x="463" y="211" font-size="17">정점 1을 처리할 때 3을 처음 발견합니다.</text>
+    <text x="463" y="245" font-size="17">정점 2의 이웃 3은 이미 발견했으므로</text>
+    <text x="463" y="271" font-size="17">큐에 다시 넣지 않습니다.</text>
+    <text x="463" y="319" fill="#506e59" font-size="15">거리 순서: 정점 0, 1, 2, 3 · – 는 None</text>
+    <text x="45" y="387" fill="#285d43" font-size="19" font-weight="700">각 단계가 끝난 직후</text>
+    <text x="955" y="387" text-anchor="end" fill="#506e59" font-size="15">거리의 숫자 d는 Some(d)를 뜻합니다</text>
+    <rect x="35" y="400" width="930" height="334" rx="14" fill="#fff" stroke="#cfdfce" stroke-width="2"/>
+    <path d="M35 452 H965 M35 508 H965 M35 564 H965 M35 620 H965 M35 676 H965" stroke="#dce8dd" stroke-width="1.5"/>
+    <g font-size="16" font-weight="700" fill="#506e59"><text x="60" y="433">단계</text><text x="245" y="433">처리 후 큐 (앞 → 뒤)</text><text x="530" y="433">거리 [0, 1, 2, 3]</text><text x="840" y="433">설명</text></g>
+    <g font-size="17">
+      <text x="60" y="486">시작</text><text x="245" y="486" font-family="Consolas, monospace">[0]</text><text x="530" y="486" font-family="Consolas, monospace">[0, –, –, –]</text><text x="840" y="486">0 등록</text>
+      <text x="60" y="542">0 처리</text><text x="245" y="542" font-family="Consolas, monospace">[1, 2]</text><text x="530" y="542" font-family="Consolas, monospace">[0, 1, 1, –]</text><text x="840" y="542">1, 2 발견</text>
+      <text x="60" y="598">1 처리</text><text x="245" y="598" font-family="Consolas, monospace">[2, 3]</text><text x="530" y="598" font-family="Consolas, monospace">[0, 1, 1, 2]</text><text x="840" y="598">3 발견</text>
+      <text x="60" y="654">2 처리</text><text x="245" y="654" font-family="Consolas, monospace">[3]</text><text x="530" y="654" font-family="Consolas, monospace">[0, 1, 1, 2]</text><text x="840" y="654">3 건너뜀</text>
+      <text x="60" y="710">3 처리</text><text x="245" y="710" font-family="Consolas, monospace">[]</text><text x="530" y="710" font-family="Consolas, monospace">[0, 1, 1, 2]</text><text x="840" y="710">종료</text>
+    </g>
+    <text x="500" y="768" text-anchor="middle" fill="#506e59" font-size="16">발견할 때 방문 표시 → 한 정점을 큐에 한 번만 넣습니다</text>
+  </g>
+</svg>

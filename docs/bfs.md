@@ -61,8 +61,102 @@ mod tests {
         let graph = vec![vec![1], vec![], vec![]];
         assert_eq!(bfs_distances(&graph, 0), vec![Some(0), Some(1), None]);
     }
+
+    #[test]
+    fn follows_documented_queue_and_distance_states() {
+        let graph = vec![vec![1, 2], vec![3], vec![3], vec![]];
+        let mut distance = vec![None; graph.len()];
+        let mut queue = VecDeque::new();
+        distance[0] = Some(0);
+        queue.push_back(0);
+        assert_eq!(queue.iter().copied().collect::<Vec<_>>(), [0]);
+        assert_eq!(distance, [Some(0), None, None, None]);
+        let mut trace = Vec::new();
+        while let Some(node) = queue.pop_front() {
+            let next_distance = distance[node].unwrap() + 1;
+            for &next in &graph[node] {
+                if distance[next].is_none() {
+                    distance[next] = Some(next_distance);
+                    queue.push_back(next);
+                }
+            }
+            trace.push((node, queue.iter().copied().collect::<Vec<_>>(), distance.clone()));
+        }
+        assert_eq!(trace, vec![
+            (0, vec![1, 2], vec![Some(0), Some(1), Some(1), None]),
+            (1, vec![2, 3], vec![Some(0), Some(1), Some(1), Some(2)]),
+            (2, vec![3], vec![Some(0), Some(1), Some(1), Some(2)]),
+            (3, vec![], vec![Some(0), Some(1), Some(1), Some(2)]),
+        ]);
+        assert_eq!(bfs_distances(&graph, 0), distance);
+    }
+
+    #[test]
+    fn handles_invalid_start_and_empty_graph() {
+        let graph = vec![vec![1], vec![]];
+        assert_eq!(bfs_distances(&graph, 2), vec![None, None]);
+        assert!(bfs_distances(&[], 0).is_empty());
+    }
 }
 ```
+
+## `bfs_distances`의 큐와 거리 따라가기
+
+![방향 그래프 0에서 1과 2, 1과 2에서 3으로 이어진 BFS에서 초기 큐 0, 정점 0 처리 후 1과 2, 정점 1 처리 후 2와 3, 정점 2 처리 후 3, 정점 3 처리 후 빈 큐가 되며 최종 거리는 0, 1, 1, 2인 단계별 변화](/assets/bfs-queue-steps.svg)
+
+그림의 거리 배열에서 숫자 `d`는 `Some(d)`, `–`는 아직 발견하지 못한 `None`을 뜻합니다. 각 행은 표시된 정점의 처리가 **끝난 직후**의 큐와 거리입니다. 시작 행은 `0`을 큐에 넣은 직후입니다.
+
+위쪽의 A~F 다이어그램과 달리, 이 단계별 그림과 위 코드의 `main` 및 테스트는 다음 방향 그래프에서 정점 `0`을 시작점으로 사용합니다.
+
+| 정점 | 인접 정점 |
+| --- | --- |
+| 0 | `[1, 2]` |
+| 1 | `[3]` |
+| 2 | `[3]` |
+| 3 | `[]` |
+
+인접 리스트는 `vec![vec![1, 2], vec![3], vec![3], vec![]]`이고, 큐의 **왼쪽이 먼저 꺼내는 쪽**입니다. `distance`의 `Some(d)`는 시작점에서 해당 정점까지의 최소 간선 수가 `d`라는 뜻이며, `None`은 아직 발견하지 못했음을 뜻합니다.
+
+### 초기화
+
+- 정점이 4개이므로 `distance = [None, None, None, None]`으로 시작합니다.
+- `start >= graph.len()`을 검사합니다. `0 >= 4`는 거짓이므로 탐색을 계속합니다. 시작점이 범위를 벗어나면 큐를 만들지 않고 `None`으로 채운 벡터를 반환합니다.
+- 시작 정점의 거리를 `Some(0)`으로 기록하고 큐 뒤에 `0`을 넣습니다. 이제 `queue = [0]`, `distance = [Some(0), None, None, None]`입니다.
+
+### 반복 1: 정점 0 처리
+
+- `pop_front()`로 `0`을 꺼내면 큐가 잠시 `[]`가 됩니다. 이웃에 기록할 `next_distance`는 `0 + 1 = 1`입니다.
+- 이웃 `1`은 아직 `None`이므로 `distance[1] = Some(1)`로 바꾸고 큐에 넣습니다. 상태는 `queue = [1]`, `distance = [Some(0), Some(1), None, None]`입니다.
+- 이어서 이웃 `2`도 처음 발견하므로 `distance[2] = Some(1)`로 바꾸고 큐에 넣습니다. 반복 종료 상태는 `queue = [1, 2]`, `distance = [Some(0), Some(1), Some(1), None]`입니다.
+
+### 반복 2: 정점 1 처리
+
+- 큐 앞에서 `1`을 꺼내면 `queue = [2]`이고, `next_distance`는 `1 + 1 = 2`입니다.
+- 이웃 `3`은 아직 `None`이므로 `distance[3] = Some(2)`로 기록하고 큐 뒤에 넣습니다.
+- 반복 종료 상태는 `queue = [2, 3]`, `distance = [Some(0), Some(1), Some(1), Some(2)]`입니다.
+
+### 반복 3: 정점 2 처리
+
+- 큐 앞에서 `2`를 꺼내면 `queue = [3]`이고, `next_distance`는 `1 + 1 = 2`입니다.
+- 이웃 `3`은 이미 `Some(2)`이므로 `is_none()`이 거짓입니다. 거리를 바꾸지 않고 **큐에도 다시 넣지 않습니다**.
+- 반복 종료 상태는 `queue = [3]`, `distance = [Some(0), Some(1), Some(1), Some(2)]`입니다.
+
+### 반복 4와 종료: 정점 3 처리
+
+- `3`을 꺼내면 큐는 `[]`가 됩니다. `next_distance`는 `2 + 1 = 3`이지만 `graph[3]`에 이웃이 없어 사용되지 않습니다.
+- 큐가 비어 다음 `pop_front()`가 `None`을 반환하면 반복문이 끝나고, 최종 거리 `vec![Some(0), Some(1), Some(1), Some(2)]`를 반환합니다.
+
+| 시점 | 처리한 정점 | 처리 후 큐 | 처리 후 거리 |
+| --- | --- | --- | --- |
+| 시작점 등록 후 | — | `[0]` | `[Some(0), None, None, None]` |
+| 반복 1 | 0 | `[1, 2]` | `[Some(0), Some(1), Some(1), None]` |
+| 반복 2 | 1 | `[2, 3]` | `[Some(0), Some(1), Some(1), Some(2)]` |
+| 반복 3 | 2 | `[3]` | `[Some(0), Some(1), Some(1), Some(2)]` |
+| 반복 4 | 3 | `[]` | `[Some(0), Some(1), Some(1), Some(2)]` |
+
+- **방문 체크 시점:** 발견한 정점은 큐에 넣을 때 바로 `Some(...)`으로 표시합니다. 그래서 `1`과 `2` 양쪽에서 도달하는 정점 `3`도 큐에 한 번만 들어갑니다.
+- **도달 불가 정점:** 시작점에서 갈 수 없는 정점은 끝까지 `None`으로 남습니다.
+- **탐색 순서:** 큐는 앞에서 꺼내고 뒤에 넣는 FIFO 구조이므로 이 예제에서는 `0 → 1 → 2 → 3` 순으로 처리하고, 거리 `0 → 1 → 2` 레벨 순서로 퍼집니다. 같은 레벨의 처리 순서는 인접 리스트의 순서에 따라 달라질 수 있습니다.
 
 테스트는 예제를 `bfs.rs`로 저장하고 `rustc --test bfs.rs -o bfs_tests.exe`로 컴파일한 뒤 PowerShell에서 `.\bfs_tests.exe`를 실행합니다. 최단 거리와 도달할 수 없는 정점을 모두 확인합니다.
 

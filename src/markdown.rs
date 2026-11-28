@@ -3,6 +3,8 @@
 pub fn render(source: &str) -> String {
     let mut html = String::new();
     let mut in_code = false;
+    let mut code_lang = String::new();
+    let mut code_buffer = String::new();
     let mut in_list = false;
     let mut paragraph = String::new();
 
@@ -25,16 +27,39 @@ pub fn render(source: &str) -> String {
                 in_list = false;
             }
             if in_code {
-                html.push_str("</code></pre>\n");
+                if code_lang == "mermaid" {
+                    html.push_str("<div class=\"mermaid\">\n");
+                    html.push_str(&code_buffer);
+                    html.push_str("\n</div>\n");
+                } else if !code_lang.is_empty() {
+                    html.push_str("</code></pre>\n");
+                } else {
+                    html.push_str("</code></pre>\n");
+                }
+                code_lang.clear();
+                code_buffer.clear();
             } else {
-                html.push_str("<pre><code>");
+                let lang = trimmed.trim_start_matches("```").trim();
+                code_lang = if !lang.is_empty() { lang.to_string() } else { String::new() };
+                if code_lang == "mermaid" {
+                    // Mermaid blocks don't output opening tag yet, wait for content
+                } else if !code_lang.is_empty() {
+                    html.push_str(&format!("<pre><code class=\"language-{}\">", escape(&code_lang)));
+                } else {
+                    html.push_str("<pre><code>");
+                }
             }
             in_code = !in_code;
             continue;
         }
         if in_code {
-            html.push_str(&escape(line));
-            html.push('\n');
+            if code_lang == "mermaid" {
+                code_buffer.push_str(line);
+                code_buffer.push('\n');
+            } else {
+                html.push_str(&escape(line));
+                html.push('\n');
+            }
             continue;
         }
         if trimmed.is_empty() {
@@ -205,15 +230,36 @@ fn inline(mut text: &str) -> String {
             if let Some(end) = rest.find("](") {
                 let after = &rest[end + 2..];
                 if let Some(close) = after.find(')') {
+                    let alt_text = &rest[..end];
                     let url = &after[..close];
-                    if crate::diagrams::get(url).is_some() {
+                    // Normalize relative paths like ./assets/... to /assets/...
+                    let normalized_url = if url.starts_with("./") {
+                        &url[2..]
+                    } else if url.starts_with("/") {
+                        url
+                    } else {
+                        url
+                    };
+                    let asset_url = if normalized_url.starts_with("assets/") {
+                        format!("/{}", normalized_url)
+                    } else {
+                        normalized_url.to_string()
+                    };
+                    // Check if it's an SVG diagram or any other image
+                    if crate::diagrams::get(&asset_url).is_some() {
                         result.push_str(&format!(
                             "<span class=\"diagram-scroll\" tabindex=\"0\" aria-label=\"다이어그램: 가로 스크롤 가능\"><img src=\"{}\" alt=\"{}\" loading=\"lazy\" decoding=\"async\"></span>",
-                            escape(url), escape(&rest[..end])
+                            escape(&asset_url), escape(alt_text)
                         ));
-                        text = &after[close + 1..];
-                        continue;
+                    } else {
+                        // Regular image (like PNG)
+                        result.push_str(&format!(
+                            "<img src=\"{}\" alt=\"{}\" loading=\"lazy\" decoding=\"async\">",
+                            escape(&asset_url), escape(alt_text)
+                        ));
                     }
+                    text = &after[close + 1..];
+                    continue;
                 }
             }
         }
@@ -242,10 +288,27 @@ fn inline(mut text: &str) -> String {
                 let after = &rest[end + 2..];
                 if let Some(close) = after.find(')') {
                     let url = &after[..close];
-                    if url.starts_with("https://") || url.starts_with("http://") {
+                    // Normalize relative paths like ./assets/... to /assets/...
+                    let normalized_url = if url.starts_with("./") {
+                        &url[2..]
+                    } else {
+                        url
+                    };
+                    // Allow https://, http://, /, or relative paths starting with assets/
+                    if url.starts_with("https://") || url.starts_with("http://") || url.starts_with("/") || normalized_url.starts_with("assets/") {
+                        let final_url = if normalized_url.starts_with("assets/") {
+                            format!("/{}", normalized_url)
+                        } else {
+                            normalized_url.to_string()
+                        };
                         result.push_str(&format!(
-                            "<a href=\"{}\" target=\"_blank\" rel=\"noopener noreferrer\">{}</a>",
-                            escape(url),
+                            "<a href=\"{}\" {}>{}</a>",
+                            escape(&final_url),
+                            if final_url.starts_with("https://") || final_url.starts_with("http://") {
+                                "target=\"_blank\" rel=\"noopener noreferrer\""
+                            } else {
+                                ""
+                            },
                             inline(&rest[..end])
                         ));
                         text = &after[close + 1..];
@@ -275,6 +338,180 @@ mod tests {
         assert!(html.contains("href=\"https://doc.rust-lang.org/\""));
         assert!(html.contains("let x = &lt;script&gt;"));
         assert!(!html.contains("<script>"));
+    }
+
+    #[test]
+    fn renders_quicksort_partition_steps() {
+        let html = render(include_str!("../docs/quicksort.md"));
+        assert!(html.contains("<img src=\"/assets/quicksort.svg\""));
+        assert!(html.contains("<img src=\"/assets/quicksort-steps.svg\" alt=\"퀵 정렬 예제"));
+        let svg = crate::diagrams::get("/assets/quicksort-steps.svg").unwrap();
+        assert!(svg.contains("<title") && svg.contains("<desc") && svg.contains("viewBox="));
+        for (stage, array, indices) in [
+            ("1", "[2, 3, 7, 3, 1, 8, 9]", "0, 0, 6"),
+            ("2", "[2, 3, 7, 3, 1, 8, 9]", "1, 1, 6"),
+            ("3", "[2, 3, 7, 3, 1, 8, 9]", "1, 2, 6"),
+            ("4", "[2, 3, 8, 3, 1, 7, 9]", "1, 2, 5"),
+            ("5", "[2, 3, 1, 3, 8, 7, 9]", "1, 2, 4"),
+            ("6", "[2, 1, 3, 3, 8, 7, 9]", "2, 3, 4"),
+            ("7", "[2, 1, 3, 3, 8, 7, 9]", "2, 4, 4"),
+        ] {
+            let row = svg
+                .lines()
+                .find(|line| line.contains(&format!(">{stage}</text>")))
+                .unwrap();
+            assert!(
+                row.contains(array) && row.contains(indices),
+                "wrong quicksort stage {stage}"
+            );
+        }
+        assert!(svg.contains("최종 결과: [1, 2, 3, 3, 7, 8, 9]"));
+    }
+
+    #[test]
+    fn renders_kmp_prefix_and_overlapping_match_steps() {
+        let html = render(include_str!("../docs/kmp.md"));
+        assert!(html.contains("<img src=\"/assets/kmp.svg\""));
+        assert!(html.contains("<img src=\"/assets/kmp-steps.svg\" alt=\"텍스트 ABABABA"));
+        assert!(html.contains("main"));
+        let svg = crate::diagrams::get("/assets/kmp-steps.svg").unwrap();
+        assert!(svg.contains("<title") && svg.contains("<desc") && svg.contains("viewBox="));
+        for text in [
+            "text = ABABABA, pattern = ABABA",
+            "lps[2]=1",
+            "lps[3]=2",
+            "lps[4]=3",
+            "t=4, p=4",
+            "일치 [0..5)",
+            "t=5, p=3",
+            "t=6, p=4",
+            "일치 [2..7)",
+            "결과는 [0, 2]",
+        ] {
+            assert!(svg.contains(text), "missing KMP step: {text}");
+        }
+    }
+
+    #[test]
+    fn renders_dijkstra_steps_with_stale_candidates() {
+        let html = render(include_str!("../docs/dijkstra.md"));
+        assert!(html.contains("<img src=\"/assets/dijkstra.svg\""));
+        assert!(html.contains("<img src=\"/assets/dijkstra-steps.svg\" alt=\"다익스트라 예제"));
+        assert!(html.contains("간선을 완화하지 않고 건너뜁니다"));
+        let svg = crate::diagrams::get("/assets/dijkstra-steps.svg").unwrap();
+        assert!(svg.contains("<title") && svg.contains("<desc") && svg.contains("viewBox="));
+        for text in [
+            "dist = [0, 4, 1, ∞]",
+            "heap: [(3,1), (4,1), (6,3)]",
+            "heap: [(4,1), (4,3), (6,3)]",
+            "현재 distance[1] = Some(3)",
+            "4 ≠ 3 → 오래된 후보 건너뜀",
+            "Reverse((6,3))",
+            "현재 거리: [0, 3, 1, 4]",
+        ] {
+            assert!(svg.contains(text), "missing Dijkstra step: {text}");
+        }
+    }
+
+    #[test]
+    fn renders_merge_sort_steps_with_stable_tie() {
+        let html = render(include_str!("../docs/merge-sort.md"));
+        assert!(html.contains("<img src=\"/assets/merge-sort.svg\""));
+        assert!(html.contains("<img src=\"/assets/merge-sort-steps.svg\" alt=\"병합 정렬 예제"));
+        assert!(html.contains("분할과 병합 따라가기"));
+        assert!(html.contains("<code>[1(L), 1(R), 3, 4, 5]</code>"));
+        let svg = crate::diagrams::get("/assets/merge-sort-steps.svg").unwrap();
+        assert!(svg.contains("<title") && svg.contains("<desc") && svg.contains("viewBox="));
+        for (stage, comparison, selected, result) in [
+            ("1", "1(L) · 1(R)", "1(L)", "[1(L)]"),
+            ("2", "5 · 1(R)", "1(R)", "[1(L), 1(R)]"),
+            ("3", "5 · 3", "3", "[1(L), 1(R), 3]"),
+            ("4", "5 · 4", "4", "[1(L), 1(R), 3, 4]"),
+            ("5", "5 · 없음", "남은 5", "[1(L), 1(R), 3, 4, 5]"),
+        ] {
+            let row = svg
+                .lines()
+                .find(|line| line.contains(&format!(">{stage}</text>")))
+                .unwrap();
+            assert!(
+                row.contains(comparison) && row.contains(selected) && row.contains(result),
+                "wrong merge stage {stage}"
+            );
+        }
+        assert!(svg.contains("같은 값은 왼쪽을 먼저"));
+    }
+
+    #[test]
+    fn renders_dfs_stack_diagram_and_trace() {
+        let html = render(include_str!("../docs/dfs.md"));
+        assert!(html.contains("<img src=\"/assets/dfs.svg\""));
+        assert!(html.contains("<img src=\"/assets/dfs-stack-steps.svg\" alt=\"양방향 간선"));
+        assert!(html.contains("스택과 방문 순서 따라가기"));
+        assert!(html.contains("<code>[2, 1]</code>"));
+        assert!(html.contains("<code>[2, 2]</code>"));
+        let svg = crate::diagrams::get("/assets/dfs-stack-steps.svg").unwrap();
+        assert!(svg.contains("<title") && svg.contains("<desc") && svg.contains("viewBox="));
+        for (stage, stack, order) in [
+            ("시작", "[0]", "[]"),
+            ("0 처리", "[2, 1]", "[0]"),
+            ("1 처리", "[2, 3]", "[0, 1]"),
+            ("3 처리", "[2]", "[0, 1, 3]"),
+            ("2 처리", "[]", "[0, 1, 3, 2]"),
+        ] {
+            let row = svg
+                .lines()
+                .find(|line| line.contains(&format!(">{stage}</text>")))
+                .unwrap();
+            assert!(row.contains(stack), "wrong stack for {stage}");
+            assert!(row.contains(order), "wrong order for {stage}");
+        }
+        assert!(svg.contains("오른쪽이 맨 위"));
+    }
+
+    #[test]
+    fn renders_bfs_queue_trace_and_distance_table() {
+        let html = render(include_str!("../docs/bfs.md"));
+        assert!(html.contains("<img src=\"/assets/bfs.svg\""));
+        assert!(html.contains("<img src=\"/assets/bfs-queue-steps.svg\" alt=\"방향 그래프"));
+        assert!(html.contains("큐와 거리 따라가기"));
+        assert!(html.contains("반복 3: 정점 2 처리"));
+        assert!(html.contains("<div class=\"table-scroll\""));
+        assert!(html.contains("<code>[1, 2]</code>"));
+        assert!(html.contains("<code>[Some(0), Some(1), Some(1), Some(2)]</code>"));
+        assert!(html.contains("큐에도 다시 넣지 않습니다"));
+    }
+
+    #[test]
+    fn bfs_diagram_queue_rows_match_distance_trace() {
+        let svg = crate::diagrams::get("/assets/bfs-queue-steps.svg").unwrap();
+        assert!(svg.contains("<title") && svg.contains("<desc") && svg.contains("viewBox="));
+        for (stage, queue, distance) in [
+            ("시작", "[0]", "[0, –, –, –]"),
+            ("0 처리", "[1, 2]", "[0, 1, 1, –]"),
+            ("1 처리", "[2, 3]", "[0, 1, 1, 2]"),
+            ("2 처리", "[3]", "[0, 1, 1, 2]"),
+            ("3 처리", "[]", "[0, 1, 1, 2]"),
+        ] {
+            let row = svg
+                .lines()
+                .find(|line| line.contains(&format!(">{stage}</text>")))
+                .unwrap();
+            assert!(row.contains(queue), "wrong queue for {stage}");
+            assert!(row.contains(distance), "wrong distance for {stage}");
+        }
+        assert!(svg.contains("큐에 다시 넣지 않습니다"));
+    }
+
+    #[test]
+    fn renders_sorting_guide_examples_and_comparison_table() {
+        let html = render(include_str!("../docs/sorting.md"));
+        assert!(html.contains("<img src=\"/assets/sorting.svg\""));
+        assert!(html.contains("<h2>정렬을 선택할 때</h2>"));
+        assert!(html.contains("<div class=\"table-scroll\""));
+        assert!(html.contains("<h2>실용 예제 1: 안정 정렬과 복합 기준</h2>"));
+        assert!(html.contains("<h2>실용 예제 2: 부동소수점과 NaN 정렬</h2>"));
+        assert!(html.contains("sort_unstable_by_key"));
+        assert!(html.contains("f64::total_cmp"));
     }
 
     #[test]

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 850" role="img" aria-labelledby="title desc">
+  <title id="title">병합 정렬의 분할과 병합 단계</title>
+  <desc id="desc">예제 입력 5, 1, 4, 1, 3을 길이 1까지 분할한 뒤 1, 5와 1, 3, 4로 병합합니다. 마지막 병합에서 같은 1을 비교하면 왼쪽의 1을 먼저 선택하고, 오른쪽의 1, 3, 4와 남은 5를 차례로 넣어 1, 1, 3, 4, 5를 만듭니다.</desc>
+  <rect x="1" y="1" width="998" height="848" rx="18" fill="#f4f8ef" stroke="#d8e6d5" stroke-width="2"/>
+  <g font-family="Arial, 'Malgun Gothic', sans-serif" fill="#173b2b">
+    <text x="500" y="45" text-anchor="middle" fill="#285d43" font-size="25" font-weight="700">병합 정렬 · 분할과 병합 단계</text>
+    <text x="500" y="76" text-anchor="middle" fill="#506e59" font-size="17">Rust 예제 입력 [5, 1, 4, 1, 3] · 오름차순</text>
+    <rect x="35" y="95" width="440" height="270" rx="14" fill="#fff" stroke="#cfdfce" stroke-width="2"/>
+    <text x="255" y="123" text-anchor="middle" fill="#285d43" font-size="18" font-weight="700">길이 1까지 분할</text>
+    <g fill="none" stroke="#8aad94" stroke-width="2"><path d="M255 161 L137 186 M255 161 L365 186 M137 215 L94 239 M137 215 L176 239 M365 215 L288 239 M365 215 L404 239 M404 268 L375 291 M404 268 L440 291"/></g>
+    <g font-family="Consolas, monospace" font-size="17" font-weight="700" text-anchor="middle">
+      <text x="255" y="157">[5, 1, 4, 1, 3]</text>
+      <text x="137" y="210">[5, 1]</text><text x="365" y="210">[4, 1, 3]</text>
+      <text x="94" y="263">[5]</text><text x="176" y="263">[1]</text><text x="288" y="263">[4]</text><text x="404" y="263">[1, 3]</text>
+      <text x="375" y="315">[1]</text><text x="440" y="315">[3]</text>
+    </g>
+    <rect x="495" y="95" width="470" height="270" rx="14" fill="#fff" stroke="#cfdfce" stroke-width="2"/>
+    <text x="520" y="133" fill="#285d43" font-size="19" font-weight="700">작은 부분부터 병합</text>
+    <g font-size="17">
+      <text x="520" y="173">[5] + [1] → [1, 5]</text>
+      <text x="520" y="208">[1] + [3] → [1, 3]</text>
+      <text x="520" y="243">[4] + [1, 3] → [1, 3, 4]</text>
+      <text x="520" y="278">[1, 5] + [1, 3, 4] → 결과</text>
+      <text x="520" y="324" fill="#506e59" font-size="15">재귀 구현은 왼쪽 부분부터 처리합니다.</text>
+    </g>
+    <text x="45" y="401" fill="#285d43" font-size="19" font-weight="700">마지막 병합: 두 부분의 앞 값을 비교</text>
+    <text x="955" y="401" text-anchor="end" fill="#506e59" font-size="15">L = 왼쪽에서 온 1 · R = 오른쪽에서 온 1</text>
+    <rect x="35" y="414" width="930" height="334" rx="14" fill="#fff" stroke="#cfdfce" stroke-width="2"/>
+    <path d="M35 466 H965 M35 522 H965 M35 578 H965 M35 634 H965 M35 690 H965" stroke="#dce8dd" stroke-width="1.5"/>
+    <g font-size="16" font-weight="700" fill="#506e59"><text x="60" y="447">단계</text><text x="170" y="447">왼쪽 앞 · 오른쪽 앞</text><text x="460" y="447">선택</text><text x="610" y="447">누적 결과</text></g>
+    <g font-size="17">
+      <text x="60" y="500">1</text><text x="170" y="500">1(L) · 1(R)</text><text x="460" y="500">1(L)</text><text x="610" y="500">[1(L)]</text>
+      <text x="60" y="556">2</text><text x="170" y="556">5 · 1(R)</text><text x="460" y="556">1(R)</text><text x="610" y="556">[1(L), 1(R)]</text>
+      <text x="60" y="612">3</text><text x="170" y="612">5 · 3</text><text x="460" y="612">3</text><text x="610" y="612">[1(L), 1(R), 3]</text>
+      <text x="60" y="668">4</text><text x="170" y="668">5 · 4</text><text x="460" y="668">4</text><text x="610" y="668">[1(L), 1(R), 3, 4]</text>
+      <text x="60" y="724">5</text><text x="170" y="724">5 · 없음</text><text x="460" y="724">남은 5</text><text x="610" y="724">[1(L), 1(R), 3, 4, 5]</text>
+    </g>
+    <text x="500" y="790" text-anchor="middle" fill="#506e59" font-size="16">같은 값은 왼쪽을 먼저 선택해 기존 상대 순서를 유지합니다.</text>
+  </g>
+</svg>

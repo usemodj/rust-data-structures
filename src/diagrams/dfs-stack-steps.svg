@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 800" role="img" aria-labelledby="title desc">
+  <title id="title">DFS 예제의 단계별 스택과 방문 순서</title>
+  <desc id="desc">양방향 간선은 0과 1, 0과 2, 1과 3 사이에 있습니다. 정점 0에서 시작할 때 스택은 0입니다. 스택 오른쪽이 맨 위입니다. 0 처리 후 스택은 2, 1이고 방문 순서는 0입니다. 1 처리 후 스택은 2, 3이고 방문 순서는 0, 1입니다. 3 처리 후 스택은 2이고 방문 순서는 0, 1, 3입니다. 2 처리 후 스택은 비고 방문 순서는 0, 1, 3, 2입니다. 정점을 꺼냈을 때 방문 표시하며 이웃을 역순으로 스택에 넣습니다.</desc>
+  <rect x="1" y="1" width="998" height="798" rx="18" fill="#f4f8ef" stroke="#d8e6d5" stroke-width="2"/>
+  <g font-family="Arial, 'Malgun Gothic', sans-serif" fill="#173b2b">
+    <text x="500" y="45" text-anchor="middle" fill="#285d43" font-size="25" font-weight="700">DFS · 스택과 방문 순서의 단계별 변화</text>
+    <text x="500" y="76" text-anchor="middle" fill="#506e59" font-size="17">양방향 그래프 · 시작 정점 0 · 명시적 스택</text>
+    <rect x="35" y="95" width="380" height="260" rx="14" fill="#fff" stroke="#cfdfce" stroke-width="2"/>
+    <text x="225" y="123" text-anchor="middle" fill="#285d43" font-size="18" font-weight="700">예제 그래프</text>
+    <g fill="none" stroke="#618c70" stroke-width="3"><path d="M208 167 L162 213"/><path d="M242 167 L288 213"/><path d="M145 254 L145 286"/></g>
+    <g fill="#e2f0e2" stroke="#33805b" stroke-width="2.5"><circle cx="225" cy="150" r="24"/><circle cx="145" cy="230" r="24"/><circle cx="305" cy="230" r="24"/><circle cx="145" cy="310" r="24"/></g>
+    <g font-family="Consolas, monospace" font-size="20" font-weight="700" text-anchor="middle"><text x="225" y="157">0</text><text x="145" y="237">1</text><text x="305" y="237">2</text><text x="145" y="317">3</text></g>
+    <rect x="435" y="95" width="530" height="260" rx="14" fill="#fff" stroke="#cfdfce" stroke-width="2"/>
+    <text x="463" y="135" fill="#285d43" font-size="19" font-weight="700">스택의 오른쪽이 맨 위 (top)</text>
+    <text x="463" y="177" font-size="17">방문 순서: 0 → 1 → 3 → 2</text>
+    <text x="463" y="211" font-size="17">0의 이웃은 역순으로 2, 1을 넣습니다.</text>
+    <text x="463" y="245" font-size="17">스택에서 꺼낼 때 방문 여부를 확인하며</text>
+    <text x="463" y="271" font-size="17">이미 방문한 정점은 건너뜁니다.</text>
+    <text x="463" y="319" fill="#506e59" font-size="15">양방향 간선: 0—1, 0—2, 1—3</text>
+    <text x="45" y="387" fill="#285d43" font-size="19" font-weight="700">각 단계가 끝난 직후</text>
+    <text x="955" y="387" text-anchor="end" fill="#506e59" font-size="15">방문 순서는 처음 방문한 정점만 기록</text>
+    <rect x="35" y="400" width="930" height="334" rx="14" fill="#fff" stroke="#cfdfce" stroke-width="2"/>
+    <path d="M35 452 H965 M35 508 H965 M35 564 H965 M35 620 H965 M35 676 H965" stroke="#dce8dd" stroke-width="1.5"/>
+    <g font-size="16" font-weight="700" fill="#506e59"><text x="60" y="433">단계</text><text x="245" y="433">처리 후 스택 (top →)</text><text x="530" y="433">방문 순서</text><text x="840" y="433">설명</text></g>
+    <g font-size="17">
+      <text x="60" y="486">시작</text><text x="245" y="486" font-family="Consolas, monospace">[0]</text><text x="530" y="486" font-family="Consolas, monospace">[]</text><text x="840" y="486">0 넣기</text>
+      <text x="60" y="542">0 처리</text><text x="245" y="542" font-family="Consolas, monospace">[2, 1]</text><text x="530" y="542" font-family="Consolas, monospace">[0]</text><text x="840" y="542">2, 1 넣기</text>
+      <text x="60" y="598">1 처리</text><text x="245" y="598" font-family="Consolas, monospace">[2, 3]</text><text x="530" y="598" font-family="Consolas, monospace">[0, 1]</text><text x="840" y="598">3 넣기</text>
+      <text x="60" y="654">3 처리</text><text x="245" y="654" font-family="Consolas, monospace">[2]</text><text x="530" y="654" font-family="Consolas, monospace">[0, 1, 3]</text><text x="840" y="654">1 건너뜀</text>
+      <text x="60" y="710">2 처리</text><text x="245" y="710" font-family="Consolas, monospace">[]</text><text x="530" y="710" font-family="Consolas, monospace">[0, 1, 3, 2]</text><text x="840" y="710">0 건너뜀</text>
+    </g>
+    <text x="500" y="768" text-anchor="middle" fill="#506e59" font-size="16">먼저 넣은 2보다 나중에 넣은 1과 3을 먼저 처리합니다</text>
+  </g>
+</svg>
